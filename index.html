@@ -3,12 +3,88 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>charDev</title>
-<meta http-equiv="refresh" content="0; url=https://chardevmdp.github.io/geli-legal/">
-<link rel="canonical" href="https://chardevmdp.github.io/geli-legal/">
-<style>body{font-family:system-ui,sans-serif;background:#fbf8f3;color:#24282d;margin:0;padding:32px 16px}@media(prefers-color-scheme:dark){body{background:#1b1f24;color:#ece7de}a{color:#c3cfdb}}</style>
+<title>charDev · Apps</title>
+<meta name="description" content="Apps de charDev: SuguruNeon y GeLi. / charDev apps: SuguruNeon and GeLi.">
+<link rel="canonical" href="https://chardevmdp.github.io/">
+<style>
+:root {
+  --bg: #fbf8f3;
+  --text: #24282d;
+  --muted: #5d646c;
+  --card: #ffffff;
+  --border: #e6dfd3;
+  --link: #1f5f9a;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1b1f24;
+    --text: #ece7de;
+    --muted: #a3abb4;
+    --card: #242a31;
+    --border: #343b44;
+    --link: #9cc3ea;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.5;
+}
+main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 40px 16px 48px;
+}
+h1 { margin: 0 0 4px; font-size: 1.75rem; }
+.lead { margin: 0 0 28px; color: var(--muted); }
+.apps { display: grid; gap: 16px; padding: 0; margin: 0; list-style: none; }
+.app {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+}
+.app h2 { margin: 0 0 6px; font-size: 1.25rem; }
+.app p { margin: 0; }
+.app .en { margin-top: 2px; color: var(--muted); font-size: 0.95rem; }
+.links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 14px 0 0; padding: 0; list-style: none; }
+a { color: var(--link); }
+.links a { display: inline-block; padding: 10px 0; font-weight: 600; }
+footer { margin-top: 32px; color: var(--muted); font-size: 0.95rem; }
+a:focus-visible { outline: 3px solid var(--link); outline-offset: 2px; border-radius: 4px; }
+</style>
 </head>
 <body>
-<p>charDev · <a href="https://chardevmdp.github.io/geli-legal/">GeLi</a> · contacto: <a href="mailto:chardev.code@gmail.com">chardev.code@gmail.com</a></p>
+<main>
+  <h1>charDev</h1>
+  <p class="lead">Apps hechas de a una. <span lang="en">Apps built one at a time.</span></p>
+
+  <ul class="apps">
+    <li class="app">
+      <h2>SuguruNeon</h2>
+      <p>Rompecabezas de lógica con estilo neón. Sin conexión y sin registro.</p>
+      <p class="en" lang="en">Neon logic puzzles. Fully offline, no sign-up.</p>
+      <ul class="links">
+        <li><a href="https://play.google.com/store/apps/details?id=com.chardev.suguruneon">Google Play</a></li>
+        <li><a href="https://chardevmdp.github.io/suguruneon-legal/">Privacidad · Privacy</a></li>
+      </ul>
+    </li>
+    <li class="app">
+      <h2>GeLi</h2>
+      <p>Gestor de links.</p>
+      <p class="en" lang="en">Link manager.</p>
+      <ul class="links">
+        <li><a href="https://chardevmdp.github.io/geli-legal/">Privacidad · Privacy</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <footer>
+    Contacto · Contact: <a href="mailto:chardev.code@gmail.com">chardev.code@gmail.com</a>
+  </footer>
+</main>
 </body>
 </html>
