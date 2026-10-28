@@ -1,0 +1,54 @@
+---
+import Base from '../layouts/Base.astro';
+import TesterSteps from '../components/TesterSteps.astro';
+import { apps } from '../data/apps';
+import { CONTACT_EMAIL } from '../data/site';
+import { hasTesting } from '../lib/apps';
+import { localePath, t } from '../lib/i18n';
+import type { Lang } from '../lib/langs';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const testingApps = apps.filter(hasTesting);
+// Hay un solo grupo de testers para todas las apps (decisión D6): alcanza con el de la primera app en testing.
+const groupUrl = testingApps[0]?.groupUrl ?? null;
+const faq = ['1', '2', '3'] as const;
+---
+<Base lang={lang} path="/tester/" title={t(lang, 'meta.testerTitle')} description={t(lang, 'meta.testerDescription')}>
+  <div class="container">
+    <h1>{t(lang, 'tester.heading')}</h1>
+    <p class="lead">{t(lang, 'tester.intro')}</p>
+
+    <h2>{t(lang, 'tester.appsHeading')}</h2>
+    {testingApps.length === 0 ? (
+      <p>{t(lang, 'tester.noneTesting')}</p>
+    ) : (
+      <ul class="actions" role="list">
+        {testingApps.map((app) => (
+          <li><a class="btn btn-primary" href={`${localePath(lang, `/${app.id}/`)}#tester`}>{app.name}</a></li>
+        ))}
+      </ul>
+    )}
+
+    {testingApps.length > 0 && (
+      <>
+        <h2>{t(lang, 'tester.joinHeading')}</h2>
+        <TesterSteps lang={lang} kind="join" groupUrl={groupUrl} />
+
+        <h2>{t(lang, 'tester.leaveHeading')}</h2>
+        <TesterSteps lang={lang} kind="leave" groupUrl={groupUrl} />
+        <p>{t(lang, 'tester.groupNote')}</p>
+      </>
+    )}
+
+    <section class="faq" aria-labelledby="faq-heading">
+      <h2 id="faq-heading">{t(lang, 'tester.faqHeading')}</h2>
+      {faq.map((n) => (
+        <details>
+          <summary>{t(lang, `tester.faq.q${n}`)}</summary>
+          <p>{t(lang, `tester.faq.a${n}`, { email: CONTACT_EMAIL })}</p>
+        </details>
+      ))}
+    </section>
+  </div>
+</Base>

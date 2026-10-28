@@ -1,0 +1,91 @@
+[
+  {
+    "id": "suguruneon",
+    "name": "SuguruNeon",
+    "status": "production",
+    "versionProduction": "1.0.2",
+    "versionTesting": null,
+    "playUrl": "https://play.google.com/store/apps/details?id=com.chardev.suguruneon",
+    "optInUrl": null,
+    "groupUrl": null,
+    "privacyUrl": "https://chardevmdp.github.io/suguruneon-legal/",
+    "icon": "/images/apps/suguruneon/icon.png",
+    "screenshots": {
+      "es": [
+        "/images/apps/suguruneon/es/1.png",
+        "/images/apps/suguruneon/es/2.png",
+        "/images/apps/suguruneon/es/3.png",
+        "/images/apps/suguruneon/es/4.png",
+        "/images/apps/suguruneon/es/5.png"
+      ],
+      "en": [
+        "/images/apps/suguruneon/en/1.png",
+        "/images/apps/suguruneon/en/2.png",
+        "/images/apps/suguruneon/en/3.png",
+        "/images/apps/suguruneon/en/4.png",
+        "/images/apps/suguruneon/en/5.png"
+      ]
+    },
+    "screenshotSize": { "width": 1080, "height": 2400 }
+  },
+  {
+    "id": "geli",
+    "name": "GeLi",
+    "status": "soon",
+    "versionProduction": null,
+    "versionTesting": null,
+    "playUrl": null,
+    "optInUrl": null,
+    "groupUrl": null,
+    "privacyUrl": "https://chardevmdp.github.io/geli-legal/",
+    "icon": "/images/apps/geli/icon.png",
+    "screenshots": {
+      "es": [
+        "/images/apps/geli/1.png",
+        "/images/apps/geli/2.png",
+        "/images/apps/geli/3.png",
+        "/images/apps/geli/4.png",
+        "/images/apps/geli/5.png",
+        "/images/apps/geli/6.png"
+      ],
+      "en": [
+        "/images/apps/geli/1.png",
+        "/images/apps/geli/2.png",
+        "/images/apps/geli/3.png",
+        "/images/apps/geli/4.png",
+        "/images/apps/geli/5.png",
+        "/images/apps/geli/6.png"
+      ]
+    },
+    "screenshotSize": { "width": 1080, "height": 1920 }
+  },
+  {
+    "id": "reinaneon",
+    "name": "ReinaNeon",
+    "status": "soon",
+    "versionProduction": null,
+    "versionTesting": null,
+    "playUrl": null,
+    "optInUrl": null,
+    "groupUrl": null,
+    "privacyUrl": "https://chardevmdp.github.io/reinaneon-legal/",
+    "icon": "/images/apps/reinaneon/icon.png",
+    "screenshots": {
+      "es": [
+        "/images/apps/reinaneon/es/1.png",
+        "/images/apps/reinaneon/es/2.png",
+        "/images/apps/reinaneon/es/3.png",
+        "/images/apps/reinaneon/es/4.png",
+        "/images/apps/reinaneon/es/5.png"
+      ],
+      "en": [
+        "/images/apps/reinaneon/en/1.png",
+        "/images/apps/reinaneon/en/2.png",
+        "/images/apps/reinaneon/en/3.png",
+        "/images/apps/reinaneon/en/4.png",
+        "/images/apps/reinaneon/en/5.png"
+      ]
+    },
+    "screenshotSize": { "width": 1080, "height": 1920 }
+  }
+]

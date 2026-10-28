@@ -1,0 +1,96 @@
+{
+  "meta": {
+    "homeTitle": "charDev · Apps",
+    "homeDescription": "Apps de charDev: el estado de cada una, la versión en producción y cómo sumarte como tester.",
+    "testerTitle": "Ser tester · charDev",
+    "testerDescription": "Cómo probar las apps de charDev antes del lanzamiento y cómo darte de baja del testing."
+  },
+  "nav": {
+    "label": "Principal",
+    "apps": "Apps",
+    "tester": "Ser tester",
+    "otherLanguage": "English",
+    "otherLanguageLabel": "Read this page in English"
+  },
+  "home": {
+    "lead": "Apps hechas de a una.",
+    "appsHeading": "Mis apps",
+    "testerHeading": "Probá las apps antes que nadie",
+    "testerBody": "Si querés ayudarme a probar una app antes del lanzamiento, sumarte lleva dos minutos y podés salir cuando quieras.",
+    "testerCta": "Cómo ser tester"
+  },
+  "status": {
+    "production": "En producción",
+    "testing": "En testing",
+    "soon": "Próximamente"
+  },
+  "app": {
+    "back": "Volver a las apps",
+    "play": "Ver en Google Play",
+    "beTester": "Ser tester",
+    "details": "Ver detalles",
+    "privacy": "Política de privacidad",
+    "screenshots": "Capturas",
+    "versionProduction": "Versión en producción",
+    "versionTesting": "Versión en testing",
+    "notYet": "Todavía no está disponible. Pronto habrá novedades acá.",
+    "iconAlt": "Ícono de {name}",
+    "screenshotAlt": "Captura {n} de {name}",
+    "testerHeading": "Ser tester",
+    "testerIntro": "Probá {name} antes del lanzamiento y ayudame a encontrar problemas.",
+    "leaveHeading": "Darte de baja del testing"
+  },
+  "tester": {
+    "heading": "Ser tester",
+    "intro": "Las apps de charDev se prueban en un testing cerrado de Google Play antes de lanzarlas. Sumarte lleva dos minutos y podés salir cuando quieras.",
+    "joinHeading": "Cómo sumarte",
+    "join": {
+      "step1": "Unite al grupo de testers de Google (un clic).",
+      "cta1": "Unirme al grupo",
+      "step2": "Abrí el enlace de prueba de la app y tocá «Convertirme en tester».",
+      "cta2": "Abrir enlace de prueba",
+      "step3": "Instalá la app desde Google Play con la misma cuenta de Google."
+    },
+    "leaveHeading": "Cómo darte de baja",
+    "leave": {
+      "step1": "Abrí de nuevo el enlace de prueba de la app y tocá «Salir del programa».",
+      "cta1": "Abrir enlace de prueba",
+      "step2": "Desinstalá la versión de prueba. Si querés, después instalá la versión pública desde Google Play.",
+      "step3": "Si no querés participar en ninguna otra prueba, salí del grupo de testers.",
+      "cta3": "Ir al grupo"
+    },
+    "groupNote": "El grupo de testers es el mismo para todas las apps: si salís del grupo, dejás de recibir las pruebas de todas ellas.",
+    "appsHeading": "Apps en testing",
+    "noneTesting": "Ahora no hay ninguna app abierta a testers. Volvé pronto.",
+    "faqHeading": "Preguntas frecuentes",
+    "faq": {
+      "q1": "¿Qué datos míos guarda charDev?",
+      "a1": "Ninguno: este sitio no tiene formularios ni cuentas. La lista de testers la administra Google a través del grupo.",
+      "q2": "¿Cómo reporto un problema?",
+      "a2": "Escribime a {email} contando qué hiciste y qué modelo de teléfono usás.",
+      "q3": "¿Puedo probar en iPhone?",
+      "a3": "Por ahora las pruebas son solo para Android, a través de Google Play."
+    }
+  },
+  "apps": {
+    "suguruneon": {
+      "tagline": "Rompecabezas de lógica con estilo neón. Sin conexión y sin registro.",
+      "description": "Suguru con estilo neón: completá cada región con números sin que se repitan entre celdas vecinas. Tiene pistas, un desafío diario y varios temas. Funciona sin conexión y sin registro."
+    },
+    "geli": {
+      "tagline": "Guardá links desde cualquier app y ordenalos en colecciones. Sin cuentas.",
+      "description": "GeLi guarda los links que compartís desde cualquier app y los ordena en colecciones. Con búsqueda, vista de detalle, modo oscuro y sin cuentas."
+    },
+    "reinaneon": {
+      "tagline": "Rompecabezas de reinas con estilo neón.",
+      "description": "Colocá una reina por fila, columna y región sin que se toquen. Hermana de SuguruNeon, con pistas, un desafío diario y varios temas."
+    }
+  },
+  "footer": {
+    "contact": "Contacto"
+  },
+  "a11y": {
+    "newTab": "(se abre en una pestaña nueva)",
+    "skip": "Saltar al contenido"
+  }
+}

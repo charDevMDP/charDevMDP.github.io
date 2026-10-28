@@ -1,0 +1,9 @@
+---
+import { t } from '../lib/i18n';
+import type { Status } from '../lib/apps';
+import type { Lang } from '../lib/langs';
+
+interface Props { lang: Lang; status: Status }
+const { lang, status } = Astro.props;
+---
+<span class={`badge badge-${status}`}>{t(lang, `status.${status}`)}</span>

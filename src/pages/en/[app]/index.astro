@@ -1,0 +1,10 @@
+---
+import AppPage from '../../../views/AppPage.astro';
+import { apps } from '../../../data/apps';
+
+export function getStaticPaths() {
+  return apps.map((app) => ({ params: { app: app.id }, props: { app } }));
+}
+const { app } = Astro.props;
+---
+<AppPage lang="en" app={app} />
