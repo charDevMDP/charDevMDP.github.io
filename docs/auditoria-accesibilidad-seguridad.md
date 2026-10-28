@@ -1,6 +1,6 @@
 # Auditoría de accesibilidad y seguridad del sitio
 
-Fecha: 2026-10-28. Rama `feat/sitio-astro` (HEAD c650b75 al auditar). Build de producción servido con `npm run preview -- --port 4321`.
+Fecha: 2026-10-28. Rama `feat/sitio-astro` (HEAD c650b75 al auditar; las correcciones de la revisión final están al commit 27bd7e9, y esta actualización del documento va en el commit siguiente). Build de producción servido con `npm run preview -- --port 4321`.
 Solo se anotan resultados medidos; lo que no se probó figura como tal.
 
 ## 1. Lighthouse
@@ -67,7 +67,28 @@ No verificado: que los textos «Convertirme en tester» y «Salir del programa»
 Corregidos: ninguno; no apareció ningún fallo de Lighthouse ni de marcado que corregir.
 
 Abiertos (menores, sin corregir):
-1. El enlace de marca `charDev` de la cabecera mide 38 px de alto en móvil (la guía pide 44 px para botones; WCAG 2.2 AA exige 24 px, que cumple). Motivo: ajuste de diseño del sistema, no un fallo; decisión del dueño.
-2. El contenedor `.shots` es `role="group"` con `tabindex="0"` pero sin nombre accesible (`aria-label`); Lighthouse no lo marca, pero un lector de pantalla anunciaría un grupo sin nombre. Motivo: requiere una clave nueva de i18n en es/en (más que un arreglo mínimo).
+1. Cerrado: el enlace de marca `charDev` mide 38 px de alto, y eso cumple el tamaño de objetivo de WCAG 2.2 AA (criterio 2.5.8 exige 24 px). Los 44 px son la guía propia del proyecto y quedan como preferencia de diseño, no como incumplimiento.
+2. Cerrado (era un error de la auditoría): `.shots` sí tiene nombre accesible, vía `aria-labelledby="shots-heading"` apuntando al `h2` de la sección.
 3. Cabeceras de seguridad no configurables en GitHub Pages (sección 3).
 4. Pendientes de prueba manual listados en la sección 2 (lector de pantalla, otros navegadores, zoom 200 %, tema claro).
+
+## 6. Revisión final (2026-10-28)
+
+Tres revisiones de toda la rama (código, accesibilidad, seguridad) y lo que se arregló en esta ronda:
+
+- Cualquier URL `*-legal` pisada: `reinaneon-legal` se suma a las protegidas en `check:dist` y `validateApps` rechaza ids que terminen en `-legal`.
+- Tipos: se agregó `npm run typecheck` (`astro check`, con `@astrojs/check` y `@types/node`) y corre en CI. Sin errores. TypeScript baja a la serie 6 porque `@astrojs/check` 0.9 todavía no soporta TypeScript 7.
+- Workflow: permisos de nivel flujo solo `contents: read`; `pages: write` e `id-token: write` únicamente en el job `deploy`; los deploys en `main` ya no se cancelan entre sí.
+- `check:dist` ahora verifica los `<link rel="alternate" hreflang>` reales (es-AR, en, x-default) y que la CSP no tenga `unsafe-inline`, `unsafe-eval` ni hosts externos; se probó que ambas comprobaciones fallan al introducir la falla.
+- `apps.json`: los tres datos de testing van juntos, capturas e ícono deben ser rutas locales, y `site` tiene una guarda explícita en lugar de `!`.
+- Accesibilidad: el enlace actual y el hover de la navegación se subrayan (no dependen solo del color); `role="list"` en las cuatro listas sin viñetas; `/tester/` no muestra los pasos de alta y baja cuando no hay ninguna app en testing (verificado también con una app de prueba en testing).
+
+Riesgo aceptado: bajo. GitHub Pages no permite `frame-ancestors` ni `X-Content-Type-Options`. Es un sitio estático sin autenticación, formularios ni acciones que cambien estado, así que el clickjacking o el sniffing de tipos no tienen qué explotar.
+
+Diferido a propósito:
+- El texto alternativo de las capturas es un ordinal ("Captura 1").
+- Redundancia del `alt` de los íconos junto al nombre de la app.
+- Textos de enlace duplicados ("Ver detalles").
+- Ícono visual de "se abre en una pestaña nueva" (hoy solo hay texto para lectores de pantalla).
+- `tabindex` en `main`.
+- Las acciones de GitHub quedan fijadas a etiquetas `@v4`/`@v3`, no a SHA.
