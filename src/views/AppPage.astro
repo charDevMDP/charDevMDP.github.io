@@ -64,10 +64,10 @@ const testingOpen = hasTesting(app);
       <section id="tester" aria-labelledby="tester-heading">
         <h2 id="tester-heading">{t(lang, 'app.testerHeading')}</h2>
         <p>{t(lang, 'app.testerIntro', { name: app.name })}</p>
+        <blockquote class="note">{t(lang, 'tester.groupNote')}</blockquote>
         <TesterSteps lang={lang} kind="join" groupUrl={app.groupUrl} optInUrl={app.optInUrl} />
         <h2>{t(lang, 'app.leaveHeading')}</h2>
         <TesterSteps lang={lang} kind="leave" groupUrl={app.groupUrl} optInUrl={app.optInUrl} />
-        <p>{t(lang, 'tester.groupNote')}</p>
       </section>
     )}
 

@@ -18,6 +18,7 @@ const faq = ['1', '2', '3'] as const;
   <div class="container">
     <h1>{t(lang, 'tester.heading')}</h1>
     <p class="lead">{t(lang, 'tester.intro')}</p>
+    {testingApps.length > 0 && <blockquote class="note">{t(lang, 'tester.groupNote')}</blockquote>}
 
     <h2>{t(lang, 'tester.appsHeading')}</h2>
     {testingApps.length === 0 ? (
@@ -37,7 +38,6 @@ const faq = ['1', '2', '3'] as const;
 
         <h2>{t(lang, 'tester.leaveHeading')}</h2>
         <TesterSteps lang={lang} kind="leave" groupUrl={groupUrl} />
-        <p>{t(lang, 'tester.groupNote')}</p>
       </>
     )}
 
