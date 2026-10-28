@@ -28,6 +28,7 @@ for (const p of pages) {
   if (!existsSync(join(DIST, p, 'index.html'))) fail(`falta la página /${p}`);
 }
 if (!existsSync(join(DIST, 'theme.js'))) fail('falta dist/theme.js (script del tema)');
+if (!existsSync(join(DIST, 'typewriter.js'))) fail('falta dist/typewriter.js (efecto de tipeo de la portada)');
 
 // 2. No pisar las políticas de privacidad
 for (const dir of SHADOWED) {
@@ -55,6 +56,10 @@ for (const p of pages) {
   }
   const head = html.slice(0, html.indexOf('</head>'));
   if (!head.includes('<script src="/theme.js"')) fail(`/${p}: falta <script src="/theme.js"> en el <head>`);
+  // El tipeo solo se carga en las portadas (/ y /en/), en el <head>
+  const isHome = logical === '';
+  if (isHome && !head.includes('<script src="/typewriter.js"')) fail(`/${p}: falta <script src="/typewriter.js"> en el <head>`);
+  if (!isHome && html.includes('typewriter.js')) fail(`/${p}: carga typewriter.js y solo es de la portada`);
   if ((html.match(/<h1[\s>]/g) ?? []).length !== 1) fail(`/${p}: debe tener exactamente una h1`);
   if (/\sstyle="/.test(html)) fail(`/${p}: tiene style en línea (la CSP lo bloquea)`);
   const csp = html.match(/<meta http-equiv="content-security-policy" content="([^"]*)"/i)?.[1];

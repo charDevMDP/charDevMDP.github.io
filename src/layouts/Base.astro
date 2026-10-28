@@ -31,6 +31,7 @@ const other = otherLang(lang);
     <meta name="theme-color" content="#0c0c0c" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#f3f5f7" media="(prefers-color-scheme: light)" />
     <script is:inline src="/theme.js"></script>
+    <slot name="head" />
     <link rel="canonical" href={canonical} />
     {LANGS.map((l) => <link rel="alternate" hreflang={htmlLang[l]} href={`${origin}${localePath(l, path)}`} />)}
     <link rel="alternate" hreflang="x-default" href={`${origin}${localePath('es', path)}`} />
