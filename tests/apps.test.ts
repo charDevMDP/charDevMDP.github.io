@@ -67,6 +67,13 @@ describe('validateApps', () => {
     expect(() => validateApps([base({ id: 'Mi App' })])).toThrow('id inválido');
   });
 
+  it('reserva los ids que terminan en -legal (son repos de políticas)', () => {
+    for (const id of ['geli-legal', 'reinaneon-legal', 'x-legal']) {
+      expect(() => validateApps([base({ id })])).toThrow('reservado');
+    }
+    expect(() => validateApps([base({ id: 'legal-x' })])).not.toThrow();
+  });
+
   it('rechaza URLs que no son https', () => {
     expect(() => validateApps([production({ playUrl: 'http://play.google.com/x' })])).toThrow('playUrl');
   });

@@ -31,7 +31,7 @@ Se trabaja en `feat/…` / `docs/…` → PR a `develop` → `develop` a `main`.
 ## Lo que no se toca desde acá
 
 - `public/app-ads.txt`: lo lee AdMob; el ID de editor es de la cuenta y sirve para todas las apps.
-- Las políticas de privacidad viven en repos propios (`geli-legal`, `suguruneon-legal`, …) bajo este mismo dominio.
+- Las políticas de privacidad viven en repos propios (`geli-legal`, `suguruneon-legal`, `reinaneon-legal`, …) bajo este mismo dominio. Por eso `validateApps` rechaza cualquier id de app que termine en `-legal`, y `check:dist` falla si el build genera esas rutas.
   Sus URLs están registradas en Play y AdMob: no se mueven, y `check:dist` falla si el build las pisa.
 
 ## Más

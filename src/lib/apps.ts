@@ -42,6 +42,7 @@ export function validateApps(input: unknown): App[] {
     need(typeof a.id === 'string' && ID_RE.test(a.id), 'id inválido (minúsculas, números y guiones)');
     if (typeof a.id === 'string') {
       need(!RESERVED_IDS.includes(a.id), 'id reservado por una ruta del sitio');
+      need(!a.id.endsWith('-legal'), 'id reservado: los -legal son repos de políticas');
       need(!seen.has(a.id), 'id repetido');
       seen.add(a.id);
     }

@@ -4,7 +4,7 @@ import { join } from 'node:path';
 
 const DIST = 'dist';
 const EXPECTED_APP_ADS = 'google.com, pub-6526918428646723, DIRECT, f08c47fec0942fa0\n';
-const SHADOWED = ['suguruneon-legal', 'geli-legal']; // viven en repos aparte: el build no puede crearlas
+const SHADOWED = ['suguruneon-legal', 'geli-legal', 'reinaneon-legal']; // viven en repos aparte: el build no puede crearlas
 const problems = [];
 const fail = (msg) => problems.push(msg);
 
