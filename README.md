@@ -1,7 +1,7 @@
 # charDev — sitio
 
 Hub de apps: https://chardevmdp.github.io/ (español) y https://chardevmdp.github.io/en/ (inglés).
-Astro estático, CSS con tokens, tema oscuro con la paleta del logo.
+Astro estático, CSS con tokens, tema oscuro (paleta del logo) y tema claro: automático según el dispositivo, con botón manual en la cabecera.
 
 ## Comandos
 

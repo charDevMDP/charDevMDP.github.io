@@ -1,5 +1,6 @@
 :root {
-  /* Paleta medida sobre el logo */
+  color-scheme: dark;
+  /* Paleta oscura (por defecto), medida sobre el logo */
   --bg: #0c0c0c;
   --bg-deep: #040404;
   --surface: #171b1f;
@@ -26,4 +27,41 @@
 
   --radius: 14px;
   --radius-sm: 8px;
+}
+
+/* Tema claro: automático según el dispositivo, salvo que el usuario haya elegido oscuro.
+   Los dos bloques claros deben ser idénticos (lo verifica tests/theme.test.ts). */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark']) {
+    --bg: #f3f5f7;
+    --bg-deep: #e6ebef;
+    --surface: #ffffff;
+    --surface-2: #dde4ea;
+    --border: #c3ccd4;
+    --text: #14181c;
+    --text-muted: #4a5560;
+    --text-dim: #586470;
+    --accent: #00717a;
+    --accent-hover: #005a62;
+    --on-accent: #ffffff;
+    --focus: #00717a;
+    color-scheme: light;
+  }
+}
+
+/* Tema claro elegido a mano con el botón de la cabecera */
+:root[data-theme='light'] {
+  --bg: #f3f5f7;
+  --bg-deep: #e6ebef;
+  --surface: #ffffff;
+  --surface-2: #dde4ea;
+  --border: #c3ccd4;
+  --text: #14181c;
+  --text-muted: #4a5560;
+  --text-dim: #586470;
+  --accent: #00717a;
+  --accent-hover: #005a62;
+  --on-accent: #ffffff;
+  --focus: #00717a;
+  color-scheme: light;
 }

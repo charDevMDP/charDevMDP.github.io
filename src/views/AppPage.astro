@@ -30,8 +30,10 @@ const testingOpen = hasTesting(app);
         height="128"
       />
       <div>
-        <h1>{app.name}</h1>
-        <StatusBadge lang={lang} status={app.status} />
+        <div class="title-row">
+          <h1>{app.name}</h1>
+          <StatusBadge lang={lang} status={app.status} />
+        </div>
         <p class="lead">{t(lang, `apps.${app.id}.tagline`)}</p>
       </div>
     </header>

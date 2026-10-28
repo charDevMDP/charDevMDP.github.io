@@ -19,6 +19,10 @@
     "testerBody": "If you want to help me test an app before launch, joining takes two minutes and you can leave whenever you like.",
     "testerCta": "How to become a tester"
   },
+  "theme": {
+    "toLight": "Switch to light theme",
+    "toDark": "Switch to dark theme"
+  },
   "status": {
     "production": "In production",
     "testing": "In testing",

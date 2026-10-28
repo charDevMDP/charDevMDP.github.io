@@ -19,6 +19,10 @@
     "testerBody": "Si querés ayudarme a probar una app antes del lanzamiento, sumarte lleva dos minutos y podés salir cuando quieras.",
     "testerCta": "Cómo ser tester"
   },
+  "theme": {
+    "toLight": "Cambiar a tema claro",
+    "toDark": "Cambiar a tema oscuro"
+  },
   "status": {
     "production": "En producción",
     "testing": "En testing",
