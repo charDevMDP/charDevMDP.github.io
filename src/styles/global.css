@@ -19,7 +19,7 @@ h3 { font-size: 1.35rem; }
 p { margin: 0 0 var(--space-4); }
 a { color: var(--accent); }
 img { max-width: 100%; height: auto; }
-a:focus-visible, summary:focus-visible, .shots:focus-visible {
+a:focus-visible, summary:focus-visible, .shots:focus-visible, .theme-toggle:focus-visible {
   outline: 3px solid var(--focus);
   outline-offset: 3px;
   border-radius: 4px;
@@ -42,9 +42,26 @@ a:focus-visible, summary:focus-visible, .shots:focus-visible {
 .header-inner { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; padding-block: var(--space-3); }
 .brand { display: inline-flex; align-items: center; gap: var(--space-3); color: var(--text); text-decoration: none; font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; }
 .brand img { width: 44px; height: auto; }
-.nav-list { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); margin: 0; padding: 0; list-style: none; }
+.nav-list { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-5); margin: 0; padding: 0; list-style: none; }
 .nav-list a { display: inline-block; padding: var(--space-3) 0; color: var(--text-muted); text-decoration: none; font-weight: 600; }
 .nav-list a:hover, .nav-list a[aria-current='page'] { color: var(--accent); text-decoration: underline; text-underline-offset: 6px; }
+
+/* Botón de tema: lo muestra theme.js; el sol aparece en oscuro (pasa a claro) y la luna en claro */
+.theme-toggle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; min-width: 40px; min-height: 40px; padding: 0;
+  background: transparent; color: var(--text-muted); cursor: pointer;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+}
+.theme-toggle[hidden] { display: none; }
+.theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
+.theme-toggle .icon-moon { display: none; }
+:root[data-theme='light'] .theme-toggle .icon-sun { display: none; }
+:root[data-theme='light'] .theme-toggle .icon-moon { display: block; }
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) .theme-toggle .icon-sun { display: none; }
+  :root:not([data-theme]) .theme-toggle .icon-moon { display: block; }
+}
 .site-footer { background: var(--bg-deep); border-top: 1px solid var(--border); padding-block: var(--space-5); color: var(--text-dim); font-size: 0.95rem; }
 .site-footer p { margin: 0; }
 
@@ -102,5 +119,5 @@ a:focus-visible, summary:focus-visible, .shots:focus-visible {
 .faq details p { margin: var(--space-3) 0 0; color: var(--text-muted); }
 
 @media (prefers-reduced-motion: no-preference) {
-  .btn, .card-title a, .nav-list a { transition: background-color 0.15s, color 0.15s, border-color 0.15s; }
+  .btn, .card-title a, .nav-list a, .theme-toggle { transition: background-color 0.15s, color 0.15s, border-color 0.15s; }
 }
