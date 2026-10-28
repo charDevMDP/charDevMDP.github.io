@@ -72,5 +72,12 @@ const testingOpen = hasTesting(app);
     {app.privacyUrl && (
       <p><a href={app.privacyUrl}>{t(lang, 'app.privacy')}</a></p>
     )}
+    {app.siteUrl && (
+      <p>
+        <a href={app.siteUrl} target="_blank" rel="noopener">
+          {t(lang, 'app.website')}<span class="sr-only"> {t(lang, 'a11y.newTab')}</span>
+        </a>
+      </p>
+    )}
   </article>
 </Base>

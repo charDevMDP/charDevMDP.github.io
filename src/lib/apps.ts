@@ -13,6 +13,7 @@ export interface App {
   optInUrl: string | null;
   groupUrl: string | null;
   privacyUrl: string | null;
+  siteUrl?: string | null;
   icon: string;
   screenshots: Record<Lang, string[]>;
   screenshotSize: { width: number; height: number };
@@ -65,6 +66,7 @@ export function validateApps(input: unknown): App[] {
     for (const key of URL_KEYS) {
       need(a[key] === null || isHttps(a[key]), `${key} debe ser null o una URL https`);
     }
+    need(a.siteUrl === undefined || a.siteUrl === null || isHttps(a.siteUrl), 'siteUrl debe ser null, faltar o ser una URL https');
     for (const key of ['versionProduction', 'versionTesting'] as const) {
       need(a[key] === null || (typeof a[key] === 'string' && a[key] !== ''), `${key} debe ser null o un texto`);
     }

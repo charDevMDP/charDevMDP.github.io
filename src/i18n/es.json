@@ -29,6 +29,7 @@
     "play": "Ver en Google Play",
     "beTester": "Ser tester",
     "details": "Ver detalles",
+    "website": "Sitio web de la app",
     "privacy": "Política de privacidad",
     "screenshots": "Capturas",
     "versionProduction": "Versión en producción",
@@ -76,6 +77,10 @@
     "suguruneon": {
       "tagline": "Rompecabezas de lógica con estilo neón. Sin conexión y sin registro.",
       "description": "Suguru con estilo neón: completá cada región con números sin que se repitan entre celdas vecinas. Tiene pistas, un desafío diario y varios temas. Funciona sin conexión y sin registro."
+    },
+    "aquimascotas": {
+      "tagline": "Adopción responsable y búsqueda de mascotas perdidas, con tu comunidad local.",
+      "description": "AquiMascotas conecta mascotas con familias responsables y ayuda a reunir a quienes se han perdido. Tiene adopción responsable, búsqueda de perdidos y comunidad local."
     },
     "geli": {
       "tagline": "Guardá links desde cualquier app y ordenalos en colecciones. Sin cuentas.",
