@@ -72,6 +72,20 @@
       "a3": "Por ahora las pruebas son solo para Android, a través de Google Play."
     }
   },
+  "apps": {
+    "suguruneon": {
+      "tagline": "Rompecabezas de lógica con estilo neón. Sin conexión y sin registro.",
+      "description": "Suguru con estilo neón: completá cada región con números sin que se repitan entre celdas vecinas. Tiene pistas, un desafío diario y varios temas. Funciona sin conexión y sin registro."
+    },
+    "geli": {
+      "tagline": "Guardá links desde cualquier app y ordenalos en colecciones. Sin cuentas.",
+      "description": "GeLi guarda los links que compartís desde cualquier app y los ordena en colecciones. Con búsqueda, vista de detalle, modo oscuro y sin cuentas."
+    },
+    "reinaneon": {
+      "tagline": "Rompecabezas de reinas con estilo neón.",
+      "description": "Colocá una reina por fila, columna y región sin que se toquen. Hermana de SuguruNeon, con pistas, un desafío diario y varios temas."
+    }
+  },
   "footer": {
     "contact": "Contacto"
   },

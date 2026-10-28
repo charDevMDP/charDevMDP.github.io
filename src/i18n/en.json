@@ -72,6 +72,20 @@
       "a3": "For now, tests are Android only, through Google Play."
     }
   },
+  "apps": {
+    "suguruneon": {
+      "tagline": "Neon logic puzzles. Fully offline, no sign-up.",
+      "description": "Suguru with a neon look: fill each region with numbers so none repeat between neighboring cells. It has hints, a daily challenge, and several themes. Works offline with no sign-up."
+    },
+    "geli": {
+      "tagline": "Save links from any app and organize them into collections. No accounts.",
+      "description": "GeLi saves the links you share from any app and organizes them into collections. With search, a detail view, dark mode, and no accounts."
+    },
+    "reinaneon": {
+      "tagline": "Neon queens puzzles.",
+      "description": "Place one queen per row, column, and region so none touch. A sister app to SuguruNeon, with hints, a daily challenge, and several themes."
+    }
+  },
   "footer": {
     "contact": "Contact"
   },
