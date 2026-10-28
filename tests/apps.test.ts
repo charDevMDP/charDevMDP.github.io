@@ -56,6 +56,11 @@ describe('validateApps', () => {
     expect(() => validateApps([testing({ groupUrl: null })])).toThrow('groupUrl');
   });
 
+  it('exige privacyUrl en producción y en testing', () => {
+    expect(() => validateApps([production({ privacyUrl: null })])).toThrow('privacyUrl');
+    expect(() => validateApps([testing({ privacyUrl: null })])).toThrow('privacyUrl');
+  });
+
   it('rechaza ids repetidos, reservados o con formato inválido', () => {
     expect(() => validateApps([base(), base()])).toThrow('repetido');
     expect(() => validateApps([base({ id: 'tester' })])).toThrow('reservado');
