@@ -29,6 +29,7 @@
     "play": "Get it on Google Play",
     "beTester": "Become a tester",
     "details": "See details",
+    "website": "App website",
     "privacy": "Privacy policy",
     "screenshots": "Screenshots",
     "versionProduction": "Production version",
@@ -76,6 +77,10 @@
     "suguruneon": {
       "tagline": "Neon logic puzzles. Fully offline, no sign-up.",
       "description": "Suguru with a neon look: fill each region with numbers so none repeat between neighboring cells. It has hints, a daily challenge, and several themes. Works offline with no sign-up."
+    },
+    "aquimascotas": {
+      "tagline": "Responsible adoption and lost-pet search, with your local community.",
+      "description": "AquiMascotas connects pets with responsible families and helps reunite lost pets with their owners. It offers responsible adoption, lost-pet search, and a local community."
     },
     "geli": {
       "tagline": "Save links from any app and organize them into collections. No accounts.",

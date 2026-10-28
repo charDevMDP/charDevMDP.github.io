@@ -5,7 +5,7 @@ const apps = JSON.parse(readFileSync('src/data/apps.json', 'utf8'));
 let broken = 0;
 
 for (const app of apps) {
-  for (const key of ['playUrl', 'optInUrl', 'groupUrl', 'privacyUrl']) {
+  for (const key of ['playUrl', 'optInUrl', 'groupUrl', 'privacyUrl', 'siteUrl']) {
     const url = app[key];
     if (!url) continue;
     try {

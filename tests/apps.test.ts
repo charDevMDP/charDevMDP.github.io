@@ -61,6 +61,18 @@ describe('validateApps', () => {
     expect(() => validateApps([testing({ privacyUrl: null })])).toThrow('privacyUrl');
   });
 
+  it('siteUrl es opcional: acepta faltante, null o una URL https', () => {
+    expect(() => validateApps([production({ siteUrl: null })])).not.toThrow();
+    expect(() => validateApps([production({ siteUrl: 'https://aquimascotas.com.ar/' })])).not.toThrow();
+    expect(() => validateApps([production()])).not.toThrow();
+  });
+
+  it('siteUrl rechaza lo que no es una URL https', () => {
+    for (const siteUrl of ['http://aquimascotas.com.ar/', 'javascript:alert(1)', '//aquimascotas.com.ar/', '', 'aquimascotas.com.ar', 5]) {
+      expect(() => validateApps([production({ siteUrl })]), String(siteUrl)).toThrow('siteUrl');
+    }
+  });
+
   it('rechaza ids repetidos, reservados o con formato inválido', () => {
     expect(() => validateApps([base(), base()])).toThrow('repetido');
     expect(() => validateApps([base({ id: 'tester' })])).toThrow('reservado');
