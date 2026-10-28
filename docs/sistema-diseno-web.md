@@ -57,7 +57,7 @@ Vienen del logo: acento, pizarra, gris, fondo y fondo profundo. Se derivaron: `-
 
 ### Tema oscuro
 
-Ratios WCAG medidos con la fórmula de luminancia relativa. Todo texto tiene que llegar a 4,5:1 (AA).
+Ratios WCAG medidos con la fórmula de luminancia relativa. Todo texto tiene que llegar a 4,5:1 (AA). `tests/theme.test.ts` verifica en ambos temas doce pares: text/bg, text/surface, text/surface-2, text-muted/bg, text-muted/surface, text-muted/bg-deep, text-dim/bg-deep, accent/bg, accent/surface, accent/bg-deep, on-accent/accent y on-accent/accent-hover.
 
 | Par | Ratio |
 |---|---|
@@ -108,8 +108,10 @@ En claro todos los pares de texto pasan AA (incluso `--text-muted` sobre `--surf
 
 - Espaciado: `--space-1` 0,25rem, `-2` 0,5rem, `-3` 0,75rem, `-4` 1rem, `-5` 1,5rem, `-6` 2rem, `-7` 3rem.
 - Radios: `--radius` 14px (tarjetas), `--radius-sm` 8px (botones).
-- Breakpoint único: `40rem`. Debajo, la grilla es de una columna y los botones son compactos (40px, `0.875rem`, en una sola fila dentro de `.card-actions` y `.actions`); portada y página de app se compactan (logo de 120px, ícono grande de 80px, capturas con más aire).
-- Desde `40rem`: grilla de dos columnas iguales (`repeat(2, minmax(0, 1fr))`) con `grid-auto-rows: 1fr`, así todas las tarjetas tienen el mismo alto y las acciones quedan abajo. Entre `40rem` y `64rem` las tarjetas llevan menos relleno para que quepan los dos botones en una fila. Botones de 44px.
+- Breakpoints (solo de ancho, en `global.css`):
+  - Menos de `40rem`: botones compactos (40px, `0.875rem`, en una sola fila dentro de `.card-actions` y `.actions`), tarjeta con menos relleno e ícono de 48px, portada con logo de 120px, ícono grande de 80px en la página de app y capturas con más aire.
+  - Desde `48rem` (768px): grilla de dos columnas iguales (`repeat(2, minmax(0, 1fr))`) con `grid-auto-rows: 1fr`, así todas las tarjetas tienen el mismo alto y las acciones quedan abajo. Por debajo, una columna (entre 40 y 48rem con botones de 44px).
+  - Entre `48rem` y `64rem`: las tarjetas llevan menos relleno para que quepan los dos botones en una fila.
 
 ## 5. Componentes
 
