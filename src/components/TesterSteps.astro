@@ -1,0 +1,37 @@
+---
+import { t } from '../lib/i18n';
+import type { Lang } from '../lib/langs';
+
+interface Props {
+  lang: Lang;
+  kind: 'join' | 'leave';
+  groupUrl?: string | null;
+  optInUrl?: string | null;
+}
+const { lang, kind, groupUrl = null, optInUrl = null } = Astro.props;
+
+const steps =
+  kind === 'join'
+    ? [
+        { text: t(lang, 'tester.join.step1'), href: groupUrl, cta: t(lang, 'tester.join.cta1') },
+        { text: t(lang, 'tester.join.step2'), href: optInUrl, cta: t(lang, 'tester.join.cta2') },
+        { text: t(lang, 'tester.join.step3'), href: null, cta: '' },
+      ]
+    : [
+        { text: t(lang, 'tester.leave.step1'), href: optInUrl, cta: t(lang, 'tester.leave.cta1') },
+        { text: t(lang, 'tester.leave.step2'), href: null, cta: '' },
+        { text: t(lang, 'tester.leave.step3'), href: groupUrl, cta: t(lang, 'tester.leave.cta3') },
+      ];
+---
+<ol class="steps">
+  {steps.map((s) => (
+    <li>
+      <p>{s.text}</p>
+      {s.href && (
+        <a class="btn btn-ghost" href={s.href} target="_blank" rel="noopener">
+          {s.cta}<span class="sr-only"> {t(lang, 'a11y.newTab')}</span>
+        </a>
+      )}
+    </li>
+  ))}
+</ol>

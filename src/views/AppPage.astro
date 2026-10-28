@@ -1,0 +1,76 @@
+---
+import Base from '../layouts/Base.astro';
+import Screenshots from '../components/Screenshots.astro';
+import StatusBadge from '../components/StatusBadge.astro';
+import TesterSteps from '../components/TesterSteps.astro';
+import { hasTesting, primaryAction, type App } from '../lib/apps';
+import { localePath, t } from '../lib/i18n';
+import type { Lang } from '../lib/langs';
+
+interface Props { lang: Lang; app: App }
+const { lang, app } = Astro.props;
+const action = primaryAction(app);
+const testingOpen = hasTesting(app);
+---
+<Base
+  lang={lang}
+  path={`/${app.id}/`}
+  title={`${app.name} · charDev`}
+  description={t(lang, `apps.${app.id}.tagline`)}
+>
+  <article class="container">
+    <p class="back"><a href={localePath(lang, '/')}>← {t(lang, 'app.back')}</a></p>
+
+    <header class="app-hero">
+      <img
+        class="app-icon app-icon-lg"
+        src={app.icon}
+        alt={t(lang, 'app.iconAlt', { name: app.name })}
+        width="128"
+        height="128"
+      />
+      <div>
+        <h1>{app.name}</h1>
+        <StatusBadge lang={lang} status={app.status} />
+        <p class="lead">{t(lang, `apps.${app.id}.tagline`)}</p>
+      </div>
+    </header>
+
+    <p>{t(lang, `apps.${app.id}.description`)}</p>
+
+    {app.status === 'soon' && <p>{t(lang, 'app.notYet')}</p>}
+
+    {(app.versionProduction || app.versionTesting) && (
+      <dl class="facts">
+        {app.versionProduction && (<><dt>{t(lang, 'app.versionProduction')}</dt><dd>{app.versionProduction}</dd></>)}
+        {app.versionTesting && (<><dt>{t(lang, 'app.versionTesting')}</dt><dd>{app.versionTesting}</dd></>)}
+      </dl>
+    )}
+
+    <div class="actions">
+      {action === 'play' && app.playUrl && (
+        <a class="btn btn-primary" href={app.playUrl} target="_blank" rel="noopener">
+          {t(lang, 'app.play')}<span class="sr-only"> {t(lang, 'a11y.newTab')}</span>
+        </a>
+      )}
+      {testingOpen && <a class="btn btn-ghost" href="#tester">{t(lang, 'app.beTester')}</a>}
+    </div>
+
+    <Screenshots app={app} lang={lang} />
+
+    {testingOpen && (
+      <section id="tester" aria-labelledby="tester-heading">
+        <h2 id="tester-heading">{t(lang, 'app.testerHeading')}</h2>
+        <p>{t(lang, 'app.testerIntro', { name: app.name })}</p>
+        <TesterSteps lang={lang} kind="join" groupUrl={app.groupUrl} optInUrl={app.optInUrl} />
+        <h2>{t(lang, 'app.leaveHeading')}</h2>
+        <TesterSteps lang={lang} kind="leave" groupUrl={app.groupUrl} optInUrl={app.optInUrl} />
+        <p>{t(lang, 'tester.groupNote')}</p>
+      </section>
+    )}
+
+    {app.privacyUrl && (
+      <p><a href={app.privacyUrl}>{t(lang, 'app.privacy')}</a></p>
+    )}
+  </article>
+</Base>

@@ -1,0 +1,26 @@
+{
+  "name": "chardev-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "typecheck": "astro check",
+    "test": "vitest run",
+    "check:dist": "node scripts/check-dist.mjs",
+    "check:links": "node scripts/check-links.mjs"
+  },
+  "dependencies": {
+    "@fontsource/inter": "^5.3.0",
+    "@fontsource/rajdhani": "^5.3.0",
+    "astro": "^7.4.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@types/node": "^26.6.5",
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.5"
+  }
+}

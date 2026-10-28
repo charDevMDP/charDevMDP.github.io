@@ -1,0 +1,37 @@
+---
+import StatusBadge from './StatusBadge.astro';
+import { localePath, t } from '../lib/i18n';
+import { primaryAction, type App } from '../lib/apps';
+import type { Lang } from '../lib/langs';
+
+interface Props { app: App; lang: Lang }
+const { app, lang } = Astro.props;
+const action = primaryAction(app);
+const detailsHref = localePath(lang, `/${app.id}/`);
+---
+<li class="card">
+  <div class="card-head">
+    <img class="app-icon" src={app.icon} alt="" width="64" height="64" loading="lazy" />
+    <div>
+      <h3 class="card-title"><a href={detailsHref}>{app.name}</a></h3>
+      <StatusBadge lang={lang} status={app.status} />
+    </div>
+  </div>
+  <p class="card-text">{t(lang, `apps.${app.id}.tagline`)}</p>
+  {app.versionProduction && (
+    <p class="card-meta">{t(lang, 'app.versionProduction')}: <strong>{app.versionProduction}</strong></p>
+  )}
+  <div class="card-actions">
+    {action === 'play' && app.playUrl && (
+      <a class="btn btn-primary" href={app.playUrl} target="_blank" rel="noopener">
+        {t(lang, 'app.play')}<span class="sr-only"> {t(lang, 'a11y.newTab')}</span>
+      </a>
+    )}
+    {action === 'tester' && (
+      <a class="btn btn-primary" href={`${detailsHref}#tester`}>{t(lang, 'app.beTester')}</a>
+    )}
+    <a class="btn btn-ghost" href={detailsHref}>
+      {t(lang, 'app.details')}<span class="sr-only"> — {app.name}</span>
+    </a>
+  </div>
+</li>
