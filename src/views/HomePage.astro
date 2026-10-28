@@ -16,7 +16,7 @@ const { lang } = Astro.props;
   </section>
   <section class="container" aria-labelledby="apps-heading">
     <h2 id="apps-heading">{t(lang, 'home.appsHeading')}</h2>
-    <ul class="grid">
+    <ul class="grid" role="list">
       {apps.map((app) => <AppCard app={app} lang={lang} />)}
     </ul>
   </section>

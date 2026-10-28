@@ -49,7 +49,7 @@ const other = otherLang(lang);
           <span>charDev</span>
         </a>
         <nav aria-label={t(lang, 'nav.label')}>
-          <ul class="nav-list">
+          <ul class="nav-list" role="list">
             <li><a href={localePath(lang, '/')} aria-current={path === '/' ? 'page' : undefined}>{t(lang, 'nav.apps')}</a></li>
             <li><a href={localePath(lang, '/tester/')} aria-current={path === '/tester/' ? 'page' : undefined}>{t(lang, 'nav.tester')}</a></li>
             <li>

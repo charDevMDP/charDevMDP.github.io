@@ -12,7 +12,7 @@ const { width, height } = app.screenshotSize;
   <section aria-labelledby="shots-heading">
     <h2 id="shots-heading">{t(lang, 'app.screenshots')}</h2>
     <div class="shots" tabindex="0" role="group" aria-labelledby="shots-heading">
-      <ul>
+      <ul role="list">
         {shots.map((src, i) => (
           <li>
             <img

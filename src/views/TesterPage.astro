@@ -21,19 +21,23 @@ const faq = ['1', '2', '3'] as const;
     {testingApps.length === 0 ? (
       <p>{t(lang, 'tester.noneTesting')}</p>
     ) : (
-      <ul class="actions">
+      <ul class="actions" role="list">
         {testingApps.map((app) => (
           <li><a class="btn btn-primary" href={`${localePath(lang, `/${app.id}/`)}#tester`}>{app.name}</a></li>
         ))}
       </ul>
     )}
 
-    <h2>{t(lang, 'tester.joinHeading')}</h2>
-    <TesterSteps lang={lang} kind="join" />
+    {testingApps.length > 0 && (
+      <>
+        <h2>{t(lang, 'tester.joinHeading')}</h2>
+        <TesterSteps lang={lang} kind="join" />
 
-    <h2>{t(lang, 'tester.leaveHeading')}</h2>
-    <TesterSteps lang={lang} kind="leave" />
-    <p>{t(lang, 'tester.groupNote')}</p>
+        <h2>{t(lang, 'tester.leaveHeading')}</h2>
+        <TesterSteps lang={lang} kind="leave" />
+        <p>{t(lang, 'tester.groupNote')}</p>
+      </>
+    )}
 
     <section class="faq" aria-labelledby="faq-heading">
       <h2 id="faq-heading">{t(lang, 'tester.faqHeading')}</h2>
