@@ -155,11 +155,11 @@ a:focus-visible, summary:focus-visible, .shots:focus-visible, .theme-toggle:focu
   .app-hero { gap: var(--space-3); margin-bottom: var(--space-4); }
   .shots { padding-bottom: var(--space-4); }
   .shots ul { gap: var(--space-5); }
-  /* Cabecera: marca centrada y menú repartido de punta a punta */
+  /* Cabecera: marca centrada y menú repartido con espacio a los lados (space-around: medio hueco en cada borde) */
   .header-inner { flex-direction: column; align-items: center; gap: var(--space-1); }
   .brand { justify-content: center; }
   .header-inner nav { width: 100%; }
-  .nav-list { width: 100%; justify-content: space-between; gap: var(--space-1); }
+  .nav-list { width: 100%; justify-content: space-around; gap: var(--space-1); }
   .nav-list a { font-size: 0.9375rem; }
 }
 
