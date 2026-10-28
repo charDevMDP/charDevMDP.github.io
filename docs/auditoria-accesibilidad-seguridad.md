@@ -102,7 +102,7 @@ Diferido a propósito:
 
 ## 8. Tipeo de la frase de la portada (2026-10-28)
 
-- WCAG 2.2.2 (Pausar, detener, ocultar): el cursor parpadea solo mientras se escribe y 3 veces más; ambas animaciones CSS son finitas y terminan ocultas. Medido en navegador (Chrome, `/` oscuro): primera letra a ~0,34 s, texto completo a ~2,1 s, último destello visible a ~3,8 s y estado de tipeo limpiado a ~4,3 s (en inglés, 4,26 s). Siempre menos de 5 s.
+- WCAG 2.2.2 (Pausar, detener, ocultar): **desviación aceptada (D12)**. Desde el bucle de la portada el cursor parpadea sin parar y la frase se reescribe cada ~8 s, así que supera los 5 s sin un control de pausa en pantalla. Mitigaciones: con `prefers-reduced-motion: reduce` no hay animación (la frase queda completa y quieta), el bucle se detiene con la pestaña oculta y, sin JS, el texto es estático. Antes (hasta D11) el efecto era finito (< 5 s) y cumplía.
 - Sin salto de layout: el alto del párrafo se midió durante todo el tipeo y no cambió (1 línea: 29,44 px en escritorio y 25,59 px a 375 px y 320 px; 2 líneas a 230 px: 51,19 px, constante).
 - Lectores de pantalla: la frase completa está en un `.sr-only` desde el primer pintado; el fantasma y el tramo que se escribe son `aria-hidden`; no hay `aria-live`.
 - `prefers-reduced-motion: reduce` (simulado con `matchMedia`): sin tipeo ni cursor, texto completo al instante. Una vez por sesión: la segunda carga no escribe.
