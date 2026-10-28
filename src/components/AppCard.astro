@@ -12,7 +12,7 @@ const detailsHref = localePath(lang, `/${app.id}/`);
 <li class="card">
   <div class="card-head">
     <img class="app-icon" src={app.icon} alt="" width="64" height="64" loading="lazy" />
-    <div>
+    <div class="card-heading">
       <h3 class="card-title"><a href={detailsHref}>{app.name}</a></h3>
       <StatusBadge lang={lang} status={app.status} />
     </div>

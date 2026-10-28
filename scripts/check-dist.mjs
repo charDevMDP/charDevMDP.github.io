@@ -27,6 +27,7 @@ for (const f of ['sitemap.xml', 'robots.txt', 'favicon-32.png', 'apple-touch-ico
 for (const p of pages) {
   if (!existsSync(join(DIST, p, 'index.html'))) fail(`falta la página /${p}`);
 }
+if (!existsSync(join(DIST, 'theme.js'))) fail('falta dist/theme.js (script del tema)');
 
 // 2. No pisar las políticas de privacidad
 for (const dir of SHADOWED) {
@@ -52,6 +53,8 @@ for (const p of pages) {
       fail(`/${p}: falta <link rel="alternate" hreflang="${h}" href="${href}">`);
     }
   }
+  const head = html.slice(0, html.indexOf('</head>'));
+  if (!head.includes('<script src="/theme.js"')) fail(`/${p}: falta <script src="/theme.js"> en el <head>`);
   if ((html.match(/<h1[\s>]/g) ?? []).length !== 1) fail(`/${p}: debe tener exactamente una h1`);
   if (/\sstyle="/.test(html)) fail(`/${p}: tiene style en línea (la CSP lo bloquea)`);
   const csp = html.match(/<meta http-equiv="content-security-policy" content="([^"]*)"/i)?.[1];
