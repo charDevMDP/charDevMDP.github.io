@@ -24,6 +24,7 @@ const ID_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const URL_KEYS = ['playUrl', 'optInUrl', 'groupUrl', 'privacyUrl'] as const;
 
 const isHttps = (v: unknown): boolean => typeof v === 'string' && /^https:\/\/\S+$/.test(v);
+const localPath = (v: unknown): boolean => typeof v === 'string' && v.startsWith('/') && !v.startsWith('//');
 const positive = (n: unknown): boolean => Number.isInteger(n) && (n as number) > 0;
 
 export function validateApps(input: unknown): App[] {
@@ -48,11 +49,15 @@ export function validateApps(input: unknown): App[] {
     }
     need(typeof a.name === 'string' && a.name.length > 0, 'falta name');
     need(STATUSES.includes(a.status as string), 'status debe ser production, testing o soon');
-    need(typeof a.icon === 'string' && a.icon.startsWith('/'), 'icon debe ser una ruta que empiece con /');
+    need(localPath(a.icon), 'icon debe ser una ruta local que empiece con / (no //)');
 
     const shots = a.screenshots as Record<string, unknown> | undefined;
     for (const lang of LANGS) {
-      need(Array.isArray(shots?.[lang]), `screenshots.${lang} debe ser una lista`);
+      const list = shots?.[lang];
+      need(Array.isArray(list), `screenshots.${lang} debe ser una lista`);
+      if (Array.isArray(list)) {
+        need(list.every(localPath), `screenshots.${lang} debe contener solo rutas locales que empiecen con / (no //)`);
+      }
     }
     const size = a.screenshotSize as { width?: unknown; height?: unknown } | undefined;
     need(positive(size?.width) && positive(size?.height), 'screenshotSize necesita width y height enteros positivos');
@@ -63,6 +68,13 @@ export function validateApps(input: unknown): App[] {
     for (const key of ['versionProduction', 'versionTesting'] as const) {
       need(a[key] === null || (typeof a[key] === 'string' && a[key] !== ''), `${key} debe ser null o un texto`);
     }
+
+    const testingKeys = ['versionTesting', 'optInUrl', 'groupUrl'] as const;
+    const testingSet = testingKeys.filter((k) => a[k] !== null && a[k] !== undefined);
+    need(
+      testingSet.length === 0 || testingSet.length === testingKeys.length,
+      'testing incompleto: versionTesting, optInUrl y groupUrl van juntos',
+    );
 
     if (a.status === 'production') {
       need(!!a.versionProduction, 'en producción falta versionProduction');

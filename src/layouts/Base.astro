@@ -15,7 +15,8 @@ interface Props {
 }
 
 const { lang, title, description, path } = Astro.props;
-const origin = Astro.site!.origin;
+if (!Astro.site) throw new Error('astro.config.mjs: falta "site"');
+const origin = Astro.site.origin;
 const canonical = `${origin}${localePath(lang, path)}`;
 const other = otherLang(lang);
 ---

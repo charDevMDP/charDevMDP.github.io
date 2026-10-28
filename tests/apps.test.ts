@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { hasTesting, primaryAction, validateApps, type App } from '../src/lib/apps';
+import { hasTesting, primaryAction, validateApps } from '../src/lib/apps';
 
 const base = (over: Record<string, unknown> = {}) => ({
   id: 'demo',
@@ -84,19 +84,28 @@ describe('validateApps', () => {
   });
 
   it('informa todos los problemas juntos', () => {
-    try {
-      validateApps([production({ versionProduction: null, playUrl: null })]);
-      expect.unreachable();
-    } catch (e) {
-      const msg = (e as Error).message;
-      expect(msg).toContain('versionProduction');
-      expect(msg).toContain('playUrl');
-    }
+    expect(() => validateApps([production({ versionProduction: null, playUrl: null })])).toThrow(
+      /versionProduction[\s\S]*playUrl/,
+    );
+  });
+
+  it('si hay algún dato de testing, exige los tres juntos (en cualquier estado)', () => {
+    expect(() => validateApps([production({ versionTesting: '1.1.0' })])).toThrow('testing incompleto');
+    expect(() => validateApps([base({ optInUrl: 'https://play.google.com/apps/testing/x' })])).toThrow('testing incompleto');
+    expect(() => validateApps([base({ groupUrl: 'https://groups.google.com/g/x' })])).toThrow('testing incompleto');
+  });
+
+  it('exige rutas locales en screenshots e icon', () => {
+    expect(() => validateApps([base({ screenshots: { es: ['https://x.com/a.png'], en: [] } })])).toThrow('screenshots.es');
+    expect(() => validateApps([base({ screenshots: { es: [], en: ['//x.com/a.png'] } })])).toThrow('screenshots.en');
+    expect(() => validateApps([base({ screenshots: { es: [3], en: [] } })])).toThrow('screenshots.es');
+    expect(() => validateApps([base({ icon: '//x.com/i.png' })])).toThrow('icon');
+    expect(() => validateApps([base({ screenshots: { es: ['/images/a.png'], en: [] } })])).not.toThrow();
   });
 });
 
 describe('primaryAction y hasTesting', () => {
-  const apps = validateApps([production({ id: 'a' }), testing({ id: 'b' }), base({ id: 'c' })]) as App[];
+  const apps = validateApps([production({ id: 'a' }), testing({ id: 'b' }), base({ id: 'c' })]);
 
   it('elige el botón principal según el estado', () => {
     expect(primaryAction(apps[0])).toBe('play');
