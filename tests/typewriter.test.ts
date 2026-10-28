@@ -9,16 +9,15 @@ type Timer = { at: number; fn: () => void };
 
 function classes() {
   const set = new Set<string>();
-  return { set, add: (c: string) => set.add(c), remove: (c: string) => set.delete(c), contains: (c: string) => set.has(c) };
+  return { set, add: (c: string) => set.add(c), remove: (c: string) => set.delete(c) };
 }
 
-function setup(opts: { reduced?: boolean; stored?: boolean; storageThrows?: boolean; noMarkup?: boolean } = {}) {
+function setup(opts: { reduced?: boolean; noMarkup?: boolean; throwOnRender?: boolean } = {}) {
   const timers: Timer[] = [];
   let now = 0;
   const html = classes();
-  const box = classes();
-  const ghost = { textContent: TEXT };
   const children: Array<{ className: string; textContent: string }> = [];
+  const ghost = { textContent: TEXT };
   const live = {
     _text: '',
     get textContent() { return this._text; },
@@ -26,27 +25,29 @@ function setup(opts: { reduced?: boolean; stored?: boolean; storageThrows?: bool
     appendChild(c: { className: string; textContent: string }) { children.push(c); },
   };
   const boxEl = {
-    classList: { add: box.add, remove: box.remove },
     querySelector: (sel: string) => (sel === '.tw-ghost' ? ghost : sel === '.tw-live' ? live : null),
   };
-  let ready: (() => void) | null = null;
-  const store = new Map<string, string>();
+  const handlers: Record<string, () => void> = {};
   const doc = {
     readyState: 'loading',
+    hidden: false,
     documentElement: { classList: { add: html.add, remove: html.remove } },
     querySelector: (sel: string) => (sel === '.typewriter' && !opts.noMarkup ? boxEl : null),
-    createElement: () => ({ className: '', textContent: '' }),
-    addEventListener: (_: string, fn: () => void) => { ready = fn; },
+    createElement: () => {
+      const el = { className: '', _t: '' };
+      return Object.defineProperty(el, 'textContent', {
+        get: () => el._t,
+        set: (v: string) => { if (opts.throwOnRender && el.className === 'tw-typed' && v.length > 3) throw new Error('boom'); el._t = v; },
+      });
+    },
+    addEventListener: (name: string, fn: () => void) => { handlers[name] = fn; },
   };
   const win = {
     matchMedia: (q: string) => ({ matches: !!opts.reduced && q.includes('reduce') }),
-    sessionStorage: opts.storageThrows
-      ? { getItem: () => { throw new Error('blocked'); }, setItem: () => { throw new Error('blocked'); } }
-      : { getItem: (k: string) => (opts.stored ? '1' : store.get(k) ?? null), setItem: (k: string, v: string) => { store.set(k, v); } },
     setTimeout: (fn: () => void, ms: number) => { timers.push({ at: now + ms, fn }); },
   };
   runInNewContext(source, { window: win, document: doc, Math });
-  const typedText = () => children.find((c) => c.className === 'tw-typed')?.textContent ?? '';
+  const typed = () => children.find((c) => c.className === 'tw-typed')?.textContent ?? '';
   const run = (until: number) => {
     for (;;) {
       timers.sort((a, b) => a.at - b.at);
@@ -58,64 +59,91 @@ function setup(opts: { reduced?: boolean; stored?: boolean; storageThrows?: bool
     }
     now = until;
   };
-  return { html, box, store, typedText, run, start: () => ready?.(), ready: () => ready !== null, timers };
+  return {
+    html, doc, typed, run, timers,
+    start: () => handlers.DOMContentLoaded?.(),
+    visible: () => handlers.visibilitychange?.(),
+    hasReadyHandler: () => !!handlers.DOMContentLoaded,
+  };
 }
 
-describe('typewriter.js', () => {
-  it('con reduced-motion no escribe: no marca la página ni registra nada', () => {
+describe('typewriter.js (bucle)', () => {
+  it('con reduced-motion no escribe: no marca la página ni agenda nada', () => {
     const s = setup({ reduced: true });
     expect(s.html.set.has('js-typing')).toBe(false);
-    expect(s.ready()).toBe(false);
+    expect(s.hasReadyHandler()).toBe(false);
     expect(s.timers).toHaveLength(0);
   });
 
-  it('si ya se escribió en la sesión, muestra el texto completo al instante', () => {
-    const s = setup({ stored: true });
-    expect(s.html.set.has('js-typing')).toBe(false);
-    expect(s.ready()).toBe(false);
-  });
-
-  it('si sessionStorage falla, igual escribe y no lanza', () => {
-    const s = setup({ storageThrows: true });
-    expect(s.html.set.has('js-typing')).toBe(true);
-    s.start();
-    s.run(1000);
-    expect(s.typedText().length).toBeGreaterThan(0);
-    s.run(7000);
-    expect(s.typedText()).toBe(TEXT);
-    expect(s.html.set.has('js-typing')).toBe(false);
-  });
-
-  it('camino feliz: marca el estado, escribe letra por letra, termina completo y limpia', () => {
+  it('escribe letra por letra hasta la frase completa y se queda fija con el estado activo', () => {
     const s = setup();
     expect(s.html.set.has('js-typing')).toBe(true);
     s.start();
-    expect(s.store.get('typewriter-done')).toBe('1');
     s.run(299);
-    expect(s.typedText()).toBe('');
-    s.run(700);
-    const partial = s.typedText();
+    expect(s.typed()).toBe('');
+    s.run(1000);
+    const partial = s.typed();
     expect(partial.length).toBeGreaterThan(0);
     expect(partial.length).toBeLessThan(TEXT.length);
     expect(TEXT.startsWith(partial)).toBe(true);
     s.run(4000);
-    expect(s.typedText()).toBe(TEXT);
-    expect(s.box.set.has('tw-done')).toBe(true);
+    expect(s.typed()).toBe(TEXT);
+    s.run(6000); // dentro de la pausa de 4,5 s con la frase completa (escribió hasta ~2,1 s)
+    expect(s.typed()).toBe(TEXT);
     expect(s.html.set.has('js-typing')).toBe(true);
-    s.run(5000); // cursor ya apagado: antes de 5 s todo vuelve al estado estático
-    expect(s.html.set.has('js-typing')).toBe(false);
-    expect(s.box.set.has('tw-done')).toBe(false);
   });
 
-  it('el temporizador de seguridad (8 s) quita el estado aunque nunca cargue el DOM', () => {
+  it('después de la pausa borra y vuelve a escribir, una y otra vez', () => {
     const s = setup();
-    expect(s.html.set.has('js-typing')).toBe(true);
+    s.start();
+    s.run(4000);
+    expect(s.typed()).toBe(TEXT);
+    s.run(7000); // pausa terminada (~6,6 s): está borrando
+    expect(s.typed().length).toBeLessThan(TEXT.length);
+    s.run(7700); // borrado completo, antes de volver a escribir (~8 s)
+    expect(s.typed()).toBe('');
+    s.run(12000); // escribió de nuevo, desde el principio
+    expect(s.typed()).toBe(TEXT);
+    s.run(60000);
+    expect(s.html.set.has('js-typing')).toBe(true); // sigue activo: no termina nunca
+  });
+
+  it('con la pestaña oculta el bucle se detiene y retoma al volver', () => {
+    const s = setup();
+    s.start();
+    s.run(1000);
+    const before = s.typed();
+    s.doc.hidden = true;
+    s.run(30000);
+    expect(s.typed()).toBe(before);
+    s.doc.hidden = false;
+    s.visible();
+    s.run(31000);
+    expect(s.typed().length).toBeGreaterThan(before.length);
+  });
+
+  it('el temporizador de seguridad (8 s) quita el estado si nunca arrancó', () => {
+    const s = setup();
     s.run(7999);
     expect(s.html.set.has('js-typing')).toBe(true);
     s.run(8000);
     expect(s.html.set.has('js-typing')).toBe(false);
     s.start(); // DOMContentLoaded tardío: no hace nada
-    expect(s.typedText()).toBe('');
+    expect(s.typed()).toBe('');
+  });
+
+  it('no corta un bucle ya iniciado a los 8 s', () => {
+    const s = setup();
+    s.start();
+    s.run(8001);
+    expect(s.html.set.has('js-typing')).toBe(true);
+  });
+
+  it('si un paso falla, vuelve al texto estático y se detiene', () => {
+    const s = setup({ throwOnRender: true });
+    s.start();
+    s.run(5000);
+    expect(s.html.set.has('js-typing')).toBe(false);
   });
 
   it('si falta el marcado, deja el texto completo', () => {
