@@ -1,0 +1,29 @@
+:root {
+  /* Paleta medida sobre el logo */
+  --bg: #0c0c0c;
+  --bg-deep: #040404;
+  --surface: #171b1f;
+  --surface-2: #444c54;
+  --border: #444c54;
+  --text: #f2f4f6;
+  --text-muted: #a9b0b8;
+  --text-dim: #848484;
+  --accent: #2cf4fc;
+  --accent-hover: #7ff8fd;
+  --on-accent: #0c0c0c;
+  --focus: #2cf4fc;
+
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Rajdhani', 'Inter', system-ui, sans-serif;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+
+  --radius: 14px;
+  --radius-sm: 8px;
+}

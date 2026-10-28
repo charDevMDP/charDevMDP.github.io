@@ -1,0 +1,73 @@
+---
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/rajdhani/700.css';
+import '../styles/global.css';
+import { CONTACT_EMAIL } from '../data/site';
+import { htmlLang, localePath, otherLang, t } from '../lib/i18n';
+import { LANGS, type Lang } from '../lib/langs';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  path: string;
+}
+
+const { lang, title, description, path } = Astro.props;
+const origin = Astro.site!.origin;
+const canonical = `${origin}${localePath(lang, path)}`;
+const other = otherLang(lang);
+---
+<!doctype html>
+<html lang={htmlLang[lang]}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0c0c0c" />
+    <link rel="canonical" href={canonical} />
+    {LANGS.map((l) => <link rel="alternate" hreflang={htmlLang[l]} href={`${origin}${localePath(l, path)}`} />)}
+    <link rel="alternate" hreflang="x-default" href={`${origin}${localePath('es', path)}`} />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={`${origin}/images/logo.png`} />
+    <meta property="og:locale" content={htmlLang[lang].replace('-', '_')} />
+  </head>
+  <body>
+    <a class="skip" href="#main">{t(lang, 'a11y.skip')}</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href={localePath(lang, '/')}>
+          <img src="/images/logo-128.png" alt="" width="128" height="100" />
+          <span>charDev</span>
+        </a>
+        <nav aria-label={t(lang, 'nav.label')}>
+          <ul class="nav-list">
+            <li><a href={localePath(lang, '/')} aria-current={path === '/' ? 'page' : undefined}>{t(lang, 'nav.apps')}</a></li>
+            <li><a href={localePath(lang, '/tester/')} aria-current={path === '/tester/' ? 'page' : undefined}>{t(lang, 'nav.tester')}</a></li>
+            <li>
+              <a
+                href={localePath(other, path)}
+                lang={htmlLang[other]}
+                hreflang={htmlLang[other]}
+                aria-label={t(lang, 'nav.otherLanguageLabel')}
+              >{t(lang, 'nav.otherLanguage')}</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main id="main"><slot /></main>
+    <footer class="site-footer">
+      <div class="container">
+        <p>{t(lang, 'footer.contact')}: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></p>
+      </div>
+    </footer>
+  </body>
+</html>
