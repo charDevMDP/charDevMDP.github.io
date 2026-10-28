@@ -99,3 +99,13 @@ Diferido a propósito:
 - CSP sin cambios: `theme.js` es un script externo de `'self'`; no hay scripts ni estilos en línea nuevos (`check:dist` lo comprueba).
 - Botón de tema: `<button>` real, 44x44px, nombre accesible que dice la acción siguiente, foco visible, íconos `aria-hidden`; oculto hasta que corre el script.
 - Lighthouse (accesibilidad / SEO / buenas prácticas), `/` y `/geli/` en oscuro y en claro (copia de `dist` con `data-theme`): 100 / 100 / 100 en las cuatro mediciones.
+
+## 8. Tipeo de la frase de la portada (2026-10-28)
+
+- WCAG 2.2.2 (Pausar, detener, ocultar): el cursor parpadea solo mientras se escribe y 3 veces más; ambas animaciones CSS son finitas y terminan ocultas. Medido en navegador (Chrome, `/` oscuro): primera letra a ~0,34 s, texto completo a ~2,1 s, último destello visible a ~3,8 s y estado de tipeo limpiado a ~4,3 s (en inglés, 4,26 s). Siempre menos de 5 s.
+- Sin salto de layout: el alto del párrafo se midió durante todo el tipeo y no cambió (1 línea: 29,44 px en escritorio y 25,59 px a 375 px y 320 px; 2 líneas a 230 px: 51,19 px, constante).
+- Lectores de pantalla: la frase completa está en un `.sr-only` desde el primer pintado; el fantasma y el tramo que se escribe son `aria-hidden`; no hay `aria-live`.
+- `prefers-reduced-motion: reduce` (simulado con `matchMedia`): sin tipeo ni cursor, texto completo al instante. Una vez por sesión: la segunda carga no escribe.
+- CSP sin cambios (script externo `'self'`, sin scripts ni estilos en línea); consola sin errores. Lighthouse móvil en `/`: accesibilidad 100, SEO 100, buenas prácticas 100.
+- Menú móvil con `space-around`: a 375 px el margen al primer y último ítem es 31,7 px (es) y 25,3 px (en); a 320 px, 24,8 px (es) y 18,4 px (en); una sola fila, sin scroll horizontal.
+- Sin verificar: dispositivos reales, otros navegadores (Safari/Firefox), lectores de pantalla.
