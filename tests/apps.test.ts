@@ -68,7 +68,7 @@ describe('validateApps', () => {
   });
 
   it('siteUrl rechaza lo que no es una URL https', () => {
-    for (const siteUrl of ['http://aquimascotas.com.ar/', 'javascript:alert(1)', '', 'aquimascotas.com.ar', 5]) {
+    for (const siteUrl of ['http://aquimascotas.com.ar/', 'javascript:alert(1)', '//aquimascotas.com.ar/', '', 'aquimascotas.com.ar', 5]) {
       expect(() => validateApps([production({ siteUrl })]), String(siteUrl)).toThrow('siteUrl');
     }
   });
