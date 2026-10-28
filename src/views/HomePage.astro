@@ -9,10 +9,15 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 ---
 <Base lang={lang} path="/" title={t(lang, 'meta.homeTitle')} description={t(lang, 'meta.homeDescription')}>
+  <script slot="head" is:inline src="/typewriter.js"></script>
   <section class="container hero">
     <img src="/images/logo-512.png" alt="" width="512" height="401" />
     <h1>charDev</h1>
-    <p class="lead">{t(lang, 'home.lead')}</p>
+    <p class="lead typewriter">
+      <span class="sr-only">{t(lang, 'home.lead')}</span>
+      <span class="tw-ghost" aria-hidden="true">{t(lang, 'home.lead')}</span>
+      <span class="tw-live" aria-hidden="true"></span>
+    </p>
   </section>
   <section class="container" aria-labelledby="apps-heading">
     <h2 id="apps-heading">{t(lang, 'home.appsHeading')}</h2>
