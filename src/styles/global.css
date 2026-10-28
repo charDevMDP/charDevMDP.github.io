@@ -139,6 +139,8 @@ a:focus-visible, summary:focus-visible, .shots:focus-visible, .theme-toggle:focu
   .btn { min-height: 40px; font-size: 0.875rem; line-height: 1.3; padding: 0 0.875rem; }
   .card-actions, .actions { flex-wrap: nowrap; gap: var(--space-2); }
   .card-actions .btn, .actions .btn { flex: 1 1 0; min-width: 0; justify-content: center; text-align: center; }
+  /* El botón principal ("Ver en Google Play") es el de texto más largo: un poco más de ancho evita que se parta en dos líneas */
+  .card-actions .btn-primary, .actions .btn-primary { flex-grow: 1.4; }
   main { padding-block: var(--space-4) var(--space-6); }
   .card { padding: var(--space-4); }
   .card-head { gap: var(--space-3); }
@@ -153,6 +155,12 @@ a:focus-visible, summary:focus-visible, .shots:focus-visible, .theme-toggle:focu
   .app-hero { gap: var(--space-3); margin-bottom: var(--space-4); }
   .shots { padding-bottom: var(--space-4); }
   .shots ul { gap: var(--space-5); }
+  /* Cabecera: marca centrada y menú repartido de punta a punta */
+  .header-inner { flex-direction: column; align-items: center; gap: var(--space-1); }
+  .brand { justify-content: center; }
+  .header-inner nav { width: 100%; }
+  .nav-list { width: 100%; justify-content: space-between; gap: var(--space-1); }
+  .nav-list a { font-size: 0.9375rem; }
 }
 
 @media (prefers-reduced-motion: no-preference) {
