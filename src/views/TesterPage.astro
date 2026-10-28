@@ -10,6 +10,8 @@ import type { Lang } from '../lib/langs';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const testingApps = apps.filter(hasTesting);
+// Hay un solo grupo de testers para todas las apps (decisión D6): alcanza con el de la primera app en testing.
+const groupUrl = testingApps[0]?.groupUrl ?? null;
 const faq = ['1', '2', '3'] as const;
 ---
 <Base lang={lang} path="/tester/" title={t(lang, 'meta.testerTitle')} description={t(lang, 'meta.testerDescription')}>
@@ -31,10 +33,10 @@ const faq = ['1', '2', '3'] as const;
     {testingApps.length > 0 && (
       <>
         <h2>{t(lang, 'tester.joinHeading')}</h2>
-        <TesterSteps lang={lang} kind="join" />
+        <TesterSteps lang={lang} kind="join" groupUrl={groupUrl} />
 
         <h2>{t(lang, 'tester.leaveHeading')}</h2>
-        <TesterSteps lang={lang} kind="leave" />
+        <TesterSteps lang={lang} kind="leave" groupUrl={groupUrl} />
         <p>{t(lang, 'tester.groupNote')}</p>
       </>
     )}
