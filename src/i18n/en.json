@@ -61,10 +61,10 @@
       "step1": "Open the app's test link again and tap “Leave the program”.",
       "cta1": "Open test link",
       "step2": "Uninstall the test version. If you like, install the public version from Google Play afterwards.",
-      "step3": "If you don't want to take part in any other test, leave the testers group.",
+      "step3": "If you don't want to take part in any other test, leave the testers group: open the group from a computer (it doesn't work from a phone), click \"Leave group\" and confirm with \"Yes, leave group\". You must be signed in with the same Google account you joined with.",
       "cta3": "Go to the group"
     },
-    "groupNote": "The testers group is the same for every app: if you leave the group, you stop receiving tests for all of them.",
+    "groupNote": "There is a single testers group for every app: you join once and get the tests for all of them. If you leave the group, you stop receiving all of them.",
     "appsHeading": "Apps in testing",
     "noneTesting": "No app is open to testers right now. Check back soon.",
     "faqHeading": "Frequently asked questions",

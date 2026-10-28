@@ -61,10 +61,10 @@
       "step1": "Abrí de nuevo el enlace de prueba de la app y tocá «Salir del programa».",
       "cta1": "Abrir enlace de prueba",
       "step2": "Desinstalá la versión de prueba. Si querés, después instalá la versión pública desde Google Play.",
-      "step3": "Si no querés participar en ninguna otra prueba, salí del grupo de testers.",
+      "step3": "Si no querés participar en ninguna otra prueba, salí del grupo de testers: entrá al grupo desde una computadora (no funciona desde el celular), tocá «Salir del grupo» y confirmá con «Sí, salir del grupo». Tenés que haber iniciado sesión con la misma cuenta de Google con la que te sumaste.",
       "cta3": "Ir al grupo"
     },
-    "groupNote": "El grupo de testers es el mismo para todas las apps: si salís del grupo, dejás de recibir las pruebas de todas ellas.",
+    "groupNote": "Hay un solo grupo de testers para todas las apps: te sumás una vez y recibís las pruebas de todas. Si salís del grupo, dejás de recibirlas todas.",
     "appsHeading": "Apps en testing",
     "noneTesting": "Ahora no hay ninguna app abierta a testers. Volvé pronto.",
     "faqHeading": "Preguntas frecuentes",
