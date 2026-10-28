@@ -9,6 +9,7 @@ Astro estático, CSS con tokens, tema oscuro con la paleta del logo.
 |---|---|
 | `npm install` | Instala dependencias |
 | `npm run dev` | Servidor local en http://localhost:4321 |
+| `npm run typecheck` | Chequeo de tipos (`astro check`, incluye los `.astro`) |
 | `npm test` | Tests de la lógica (vitest) |
 | `npm run build` | Compila a `dist/` (falla si faltan datos o textos) |
 | `npm run check:dist` | Verifica `dist/`: páginas, hreflang, `app-ads.txt`, políticas sin pisar |

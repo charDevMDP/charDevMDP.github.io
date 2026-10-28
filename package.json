@@ -7,6 +7,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "typecheck": "astro check",
     "test": "vitest run",
     "check:dist": "node scripts/check-dist.mjs",
     "check:links": "node scripts/check-links.mjs"
@@ -17,7 +18,9 @@
     "astro": "^7.4.2"
   },
   "devDependencies": {
-    "typescript": "^7.0.2",
+    "@astrojs/check": "^0.9.12",
+    "@types/node": "^26.6.5",
+    "typescript": "^6.0.3",
     "vitest": "^5.0.5"
   }
 }
