@@ -53,6 +53,7 @@ describe('tokens: tema claro y oscuro', () => {
   const PAIRS: Array<[string, string]> = [
     ['--text', '--bg'], ['--text', '--surface'], ['--text-muted', '--bg'], ['--text-muted', '--surface'],
     ['--text-dim', '--bg-deep'], ['--accent', '--bg'], ['--accent', '--surface'], ['--on-accent', '--accent'],
+    ['--accent', '--bg-deep'], ['--text-muted', '--bg-deep'], ['--text', '--surface-2'], ['--on-accent', '--accent-hover'],
   ];
   for (const [name, theme] of [['oscuro', dark], ['claro', lightManual]] as const) {
     for (const [fg, bg] of PAIRS) {
