@@ -89,15 +89,17 @@ a:focus-visible, summary:focus-visible, .shots:focus-visible, .theme-toggle:focu
 .hero { text-align: center; padding-block: var(--space-5); }
 .hero img { width: 220px; height: auto; margin-inline: auto; }
 .lead { color: var(--text-muted); font-size: 1.15rem; }
-.grid { display: grid; gap: var(--space-5); grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); margin: 0; padding: 0; list-style: none; }
-.card { display: flex; flex-direction: column; gap: var(--space-2); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-5); }
+.grid { display: grid; gap: var(--space-5); grid-template-columns: minmax(0, 1fr); margin: 0; padding: 0; list-style: none; }
+.card { min-width: 0; display: flex; flex-direction: column; gap: var(--space-2); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-5); }
 .card-head { display: flex; align-items: center; gap: var(--space-4); }
-.card-title { margin: 0 0 var(--space-1); }
+.card-heading { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1) var(--space-3); min-width: 0; }
+.card-title { margin: 0; }
 .card-title a { color: var(--text); text-decoration: none; }
 .card-title a:hover { color: var(--accent); }
 .card-text { color: var(--text-muted); margin: 0; }
 .card-meta { margin: 0; font-size: 0.95rem; color: var(--text-muted); }
-.card-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: auto; padding-top: var(--space-3); }
+.card-actions { display: flex; flex-wrap: nowrap; gap: var(--space-2); margin-top: auto; padding-top: var(--space-3); }
+.card-actions .btn { flex: 1 1 auto; min-width: 0; justify-content: center; text-align: center; padding-inline: var(--space-3); }
 .app-icon { width: 64px; height: 64px; border-radius: 16px; flex: none; }
 .app-icon-lg { width: 128px; height: 128px; border-radius: 28px; }
 .cta-band { margin-top: var(--space-7); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-5); }
@@ -105,6 +107,9 @@ a:focus-visible, summary:focus-visible, .shots:focus-visible, .theme-toggle:focu
 /* Página de app y de testers */
 .back { margin-bottom: var(--space-5); }
 .app-hero { display: flex; align-items: center; gap: var(--space-5); flex-wrap: wrap; margin-bottom: var(--space-5); }
+.app-hero > div { flex: 1 1 14rem; min-width: 0; }
+.title-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-3); margin-bottom: var(--space-2); }
+.title-row h1 { margin: 0; }
 .facts { display: grid; grid-template-columns: max-content 1fr; gap: var(--space-2) var(--space-5); margin: 0 0 var(--space-5); }
 .facts dt { color: var(--text-muted); }
 .facts dd { margin: 0; font-weight: 600; }
@@ -117,6 +122,37 @@ a:focus-visible, summary:focus-visible, .shots:focus-visible, .theme-toggle:focu
 .faq details { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: var(--space-3) var(--space-4); margin-bottom: var(--space-3); background: var(--surface); }
 .faq summary { cursor: pointer; font-weight: 600; }
 .faq details p { margin: var(--space-3) 0 0; color: var(--text-muted); }
+
+/* Escritorio y tablet: dos columnas con tarjetas del mismo alto */
+@media (min-width: 40rem) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 1fr; }
+}
+/* Tarjetas angostas (tablet): menos relleno para que quepan título + insignia y los dos botones */
+@media (min-width: 40rem) and (max-width: 63.999rem) {
+  .card { padding: var(--space-4); }
+  .card-head { gap: var(--space-3); }
+}
+
+/* Móvil: botones compactos, portada y página de app más cortas */
+@media (max-width: 39.999rem) {
+  .btn { min-height: 40px; font-size: 0.875rem; line-height: 1.3; padding: 0 0.875rem; }
+  .card-actions, .actions { flex-wrap: nowrap; gap: var(--space-2); }
+  .card-actions .btn, .actions .btn { flex: 1 1 0; min-width: 0; justify-content: center; text-align: center; }
+  main { padding-block: var(--space-4) var(--space-6); }
+  .card { padding: var(--space-4); }
+  .card-head { gap: var(--space-3); }
+  .app-icon { width: 48px; height: 48px; border-radius: 12px; }
+  .badge { font-size: 0.8rem; }
+  .hero { padding-block: var(--space-2); }
+  .hero img { width: 120px; }
+  .hero h1 { font-size: 2rem; margin-bottom: var(--space-2); }
+  .hero .lead { font-size: 1rem; margin-bottom: var(--space-2); }
+  h2 { font-size: 1.5rem; margin-top: var(--space-4); }
+  .app-icon.app-icon-lg { width: 80px; height: 80px; border-radius: 18px; }
+  .app-hero { gap: var(--space-3); margin-bottom: var(--space-4); }
+  .shots { padding-bottom: var(--space-4); }
+  .shots ul { gap: var(--space-5); }
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .btn, .card-title a, .nav-list a, .theme-toggle { transition: background-color 0.15s, color 0.15s, border-color 0.15s; }
