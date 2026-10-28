@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import AppCard from '../components/AppCard.astro';
+import { apps } from '../data/apps';
+import { localePath, t } from '../lib/i18n';
+import type { Lang } from '../lib/langs';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+---
+<Base lang={lang} path="/" title={t(lang, 'meta.homeTitle')} description={t(lang, 'meta.homeDescription')}>
+  <section class="container hero">
+    <img src="/images/logo-512.png" alt="" width="512" height="401" />
+    <h1>charDev</h1>
+    <p class="lead">{t(lang, 'home.lead')}</p>
+  </section>
+  <section class="container" aria-labelledby="apps-heading">
+    <h2 id="apps-heading">{t(lang, 'home.appsHeading')}</h2>
+    <ul class="grid">
+      {apps.map((app) => <AppCard app={app} lang={lang} />)}
+    </ul>
+  </section>
+  <section class="container cta-band" aria-labelledby="tester-heading">
+    <h2 id="tester-heading">{t(lang, 'home.testerHeading')}</h2>
+    <p>{t(lang, 'home.testerBody')}</p>
+    <a class="btn btn-primary" href={localePath(lang, '/tester/')}>{t(lang, 'home.testerCta')}</a>
+  </section>
+</Base>

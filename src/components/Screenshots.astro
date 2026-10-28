@@ -1,0 +1,30 @@
+---
+import { t } from '../lib/i18n';
+import type { App } from '../lib/apps';
+import type { Lang } from '../lib/langs';
+
+interface Props { app: App; lang: Lang }
+const { app, lang } = Astro.props;
+const shots = app.screenshots[lang];
+const { width, height } = app.screenshotSize;
+---
+{shots.length > 0 && (
+  <section aria-labelledby="shots-heading">
+    <h2 id="shots-heading">{t(lang, 'app.screenshots')}</h2>
+    <div class="shots" tabindex="0" role="group" aria-labelledby="shots-heading">
+      <ul>
+        {shots.map((src, i) => (
+          <li>
+            <img
+              src={src}
+              alt={t(lang, 'app.screenshotAlt', { n: i + 1, name: app.name })}
+              width={width}
+              height={height}
+              loading="lazy"
+            />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+)}
