@@ -92,3 +92,10 @@ Diferido a propósito:
 - Ícono visual de "se abre en una pestaña nueva" (hoy solo hay texto para lectores de pantalla).
 - `tabindex` en `main`.
 - Las acciones de GitHub quedan fijadas a etiquetas `@v4`/`@v3`, no a SHA.
+
+## 7. Tema claro (2026-10-28)
+
+- Contraste del tema claro medido con la fórmula WCAG: todos los pares de texto pasan 4,5:1. Mínimo: `--accent` sobre `--bg-deep` 4,80:1 (navegación activa); resto entre 5,04:1 y 17,84:1 (tabla en `docs/sistema-diseno-web.md`). `tests/theme.test.ts` lo verifica en ambos temas.
+- CSP sin cambios: `theme.js` es un script externo de `'self'`; no hay scripts ni estilos en línea nuevos (`check:dist` lo comprueba).
+- Botón de tema: `<button>` real, 44x44px, nombre accesible que dice la acción siguiente, foco visible, íconos `aria-hidden`; oculto hasta que corre el script.
+- Lighthouse (accesibilidad / SEO / buenas prácticas), `/` y `/geli/` en oscuro y en claro (copia de `dist` con `data-theme`): 100 / 100 / 100 en las cuatro mediciones.
