@@ -101,8 +101,8 @@ En claro todos los pares de texto pasan AA (incluso `--text-muted` sobre `--surf
 ## 3. Tipografía
 
 - Títulos y frase de la portada: Share Tech Mono 400 (`--font-display`; tiene ñ y no existe en negrita, por eso h1–h3 y la marca van en 400).
-- Texto: Inter 400 y 600 (`--font-body`).
-- Se sirven desde el propio sitio con `@fontsource/share-tech-mono` y `@fontsource/inter` (sin CDN externo).
+- Texto: JetBrains Mono 400 y 600 (`--font-body`; tiene ñ).
+- Se sirven desde el propio sitio con `@fontsource/share-tech-mono` y `@fontsource/jetbrains-mono` (sin CDN externo).
 
 ## 4. Espaciado, radios y breakpoints
 
