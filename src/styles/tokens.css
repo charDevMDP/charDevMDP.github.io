@@ -14,7 +14,7 @@
   --on-accent: #0c0c0c;
   --focus: #2cf4fc;
 
-  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
   --font-display: 'Share Tech Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
   --space-1: 0.25rem;
