@@ -40,8 +40,25 @@
     "privacyUrl": "https://aquimascotas.com.ar/privacy/",
     "siteUrl": "https://aquimascotas.com.ar/",
     "icon": "/images/apps/aquimascotas/icon.png",
-    "screenshots": { "es": [], "en": [] },
-    "screenshotSize": { "width": 1080, "height": 1920 }
+    "screenshots": {
+      "es": [
+        "/images/apps/aquimascotas/es/1.jpg",
+        "/images/apps/aquimascotas/es/2.jpg",
+        "/images/apps/aquimascotas/es/3.jpg",
+        "/images/apps/aquimascotas/es/4.jpg",
+        "/images/apps/aquimascotas/es/5.jpg",
+        "/images/apps/aquimascotas/es/6.jpg"
+      ],
+      "en": [
+        "/images/apps/aquimascotas/es/1.jpg",
+        "/images/apps/aquimascotas/es/2.jpg",
+        "/images/apps/aquimascotas/es/3.jpg",
+        "/images/apps/aquimascotas/es/4.jpg",
+        "/images/apps/aquimascotas/es/5.jpg",
+        "/images/apps/aquimascotas/es/6.jpg"
+      ]
+    },
+    "screenshotSize": { "width": 1080, "height": 2160 }
   },
   {
     "id": "geli",
