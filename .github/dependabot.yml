@@ -1,0 +1,14 @@
+# Mantiene al día las acciones del workflow (están fijadas a un commit, no a una etiqueta) y las dependencias.
+# Los PR salen contra develop, como el resto del trabajo.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    target-branch: develop
+    schedule:
+      interval: monthly
+  - package-ecosystem: npm
+    directory: /
+    target-branch: develop
+    schedule:
+      interval: monthly

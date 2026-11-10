@@ -1,9 +1,13 @@
 @import './tokens.css';
 
 *, *::before, *::after { box-sizing: border-box; }
+/* Base táctil: sin inflado de fuente en horizontal, sin el destello gris al tocar (los botones tienen :active) y sin la espera del doble toque */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; }
+a, button { touch-action: manipulation; }
 body {
   margin: 0;
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   background: var(--bg);
@@ -41,11 +45,11 @@ a:focus-visible, summary:focus-visible, .shots:focus-visible, .theme-toggle:focu
 /* Cabecera y pie */
 .site-header { background: var(--bg-deep); border-bottom: 1px solid var(--border); }
 .header-inner { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; padding-block: var(--space-3); }
-.brand { display: inline-flex; align-items: center; gap: var(--space-3); color: var(--text); text-decoration: none; font-family: var(--font-display); font-weight: 400; font-size: 1.5rem; }
+.brand { display: inline-flex; align-items: center; min-height: 44px; gap: var(--space-3); color: var(--text); text-decoration: none; font-family: var(--font-display); font-weight: 400; font-size: 1.5rem; }
 .brand img { width: 44px; height: auto; }
 .nav-list { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-5); margin: 0; padding: 0; list-style: none; }
 .nav-list a { display: inline-block; padding: var(--space-3) 0; color: var(--text-muted); text-decoration: none; font-weight: 600; }
-.nav-list a:hover, .nav-list a[aria-current='page'] { color: var(--accent); text-decoration: underline; text-underline-offset: 6px; }
+.nav-list a[aria-current='page'] { color: var(--accent); text-decoration: underline; text-underline-offset: 6px; }
 
 /* Botón de tema: lo muestra theme.js; el sol aparece en oscuro (pasa a claro) y la luna en claro */
 .theme-toggle {
@@ -55,7 +59,6 @@ a:focus-visible, summary:focus-visible, .shots:focus-visible, .theme-toggle:focu
   border: 1px solid var(--border); border-radius: var(--radius-sm);
 }
 .theme-toggle[hidden] { display: none; }
-.theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
 .theme-toggle .icon-moon { display: none; }
 :root[data-theme='light'] .theme-toggle .icon-sun { display: none; }
 :root[data-theme='light'] .theme-toggle .icon-moon { display: block; }
@@ -71,11 +74,16 @@ a:focus-visible, summary:focus-visible, .shots:focus-visible, .theme-toggle:focu
   display: inline-flex; align-items: center; min-height: 44px;
   padding: 0 var(--space-4); border-radius: var(--radius-sm);
   border: 2px solid var(--accent); font-weight: 600; text-decoration: none;
+  user-select: none; -webkit-user-select: none;
 }
 .btn-primary { background: var(--accent); color: var(--on-accent); }
-.btn-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
 .btn-ghost { background: transparent; color: var(--accent); }
-.btn-ghost:hover { background: var(--surface); }
+/* Respuesta al toque: :active funciona con dedo y con mouse; :hover solo donde hay mouse (ver el final) */
+.btn-primary:active { background: var(--accent-hover); border-color: var(--accent-hover); }
+.btn-ghost:active { background: var(--surface); }
+.btn:active { transform: scale(0.98); }
+/* Enlaces de texto sueltos: alto táctil de 44 px */
+.text-link { display: inline-flex; align-items: center; min-height: 44px; }
 
 /* Insignias de estado */
 .badge {
@@ -105,7 +113,6 @@ a:focus-visible, summary:focus-visible, .shots:focus-visible, .theme-toggle:focu
 .card-heading { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1) var(--space-3); min-width: 0; }
 .card-title { margin: 0; }
 .card-title a { color: var(--text); text-decoration: none; }
-.card-title a:hover { color: var(--accent); }
 .card-text { color: var(--text-muted); margin: 0; }
 .card-meta { margin: 0; font-size: 0.95rem; color: var(--text-muted); }
 .card-actions { display: flex; flex-wrap: nowrap; gap: var(--space-2); margin-top: auto; padding-top: var(--space-3); }
@@ -127,12 +134,14 @@ a:focus-visible, summary:focus-visible, .shots:focus-visible, .theme-toggle:focu
 .actions { display: flex; flex-wrap: wrap; gap: var(--space-3); margin: 0 0 var(--space-5); padding: 0; list-style: none; }
 .steps { display: grid; gap: var(--space-4); padding-left: var(--space-5); }
 .steps li p { margin-bottom: var(--space-2); }
-.shots { overflow-x: auto; padding-bottom: var(--space-3); }
+.shots { overflow-x: auto; padding-bottom: var(--space-3); overscroll-behavior-x: contain; scroll-snap-type: x proximity; }
+.shots li { scroll-snap-align: start; }
 .shots ul { display: flex; gap: var(--space-4); margin: 0; padding: 0; list-style: none; width: max-content; }
 .shots img { height: 360px; width: auto; max-width: none; border-radius: var(--radius-sm); border: 1px solid var(--border); }
-.faq details { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: var(--space-3) var(--space-4); margin-bottom: var(--space-3); background: var(--surface); }
-.faq summary { cursor: pointer; font-weight: 600; }
-.faq details p { margin: var(--space-3) 0 0; color: var(--text-muted); }
+.faq details { border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: var(--space-3); background: var(--surface); }
+/* El relleno va en el <summary> (no en el <details>) para que toda la fila sea tocable, con 44 px de alto */
+.faq summary { cursor: pointer; font-weight: 600; min-height: 44px; padding: var(--space-3) var(--space-4); }
+.faq details p { margin: 0; padding: 0 var(--space-4) var(--space-4); color: var(--text-muted); }
 
 /* Desde 48rem: dos columnas con tarjetas del mismo alto */
 @media (min-width: 48rem) {
@@ -144,35 +153,49 @@ a:focus-visible, summary:focus-visible, .shots:focus-visible, .theme-toggle:focu
   .card-head { gap: var(--space-3); }
 }
 
-/* Móvil: botones compactos, portada y página de app más cortas */
+/* Móvil. La fuente es monoespaciada (cada letra ocupa ~0,6 em, bastante más que una proporcional), así que
+   acá todo baja un escalón: cuerpo 14 px, títulos más chicos y más aire entre bloques. Los botones se apilan
+   a ancho completo con 44 px de alto (objetivo táctil mínimo) en vez de pelear por la misma fila. */
 @media (max-width: 39.999rem) {
-  /* La fuente de texto es monoespaciada (más ancha que una proporcional): en móvil se achica un escalón */
-  body { font-size: 0.9375rem; }
-  .btn { min-height: 40px; font-size: 0.8125rem; line-height: 1.3; padding: 0 0.625rem; }
-  .card-actions, .actions { flex-wrap: nowrap; gap: var(--space-2); }
-  .card-actions .btn, .actions .btn { flex: 1 1 0; min-width: 0; justify-content: center; text-align: center; }
-  /* El botón principal ("Ver en Google Play") es el de texto más largo: un poco más de ancho evita que se parta en dos líneas */
-  .card-actions .btn-primary, .actions .btn-primary { flex-grow: 1.4; }
-  main { padding-block: var(--space-4) var(--space-6); }
-  .card { padding: var(--space-4); }
-  .card-head { gap: var(--space-3); }
-  .app-icon { width: 48px; height: 48px; border-radius: 12px; }
-  .badge { font-size: 0.8rem; }
-  .hero { padding-block: var(--space-2); }
+  body { font-size: 0.875rem; line-height: 1.65; }
+  main { padding-block: var(--space-5) var(--space-7); }
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.25rem; margin-top: var(--space-6); }
+  h3 { font-size: 1.0625rem; }
+  .lead { font-size: 0.9375rem; }
+  .btn { min-height: 44px; font-size: 0.875rem; line-height: 1.3; padding: 0 var(--space-4); }
+  .card-actions, div.actions { flex-direction: column; align-items: stretch; gap: var(--space-3); }
+  .card-actions .btn, div.actions .btn { flex: none; justify-content: center; text-align: center; }
+  .card { padding: var(--space-5); gap: var(--space-3); }
+  .card-head { gap: var(--space-4); }
+  .app-icon { width: 56px; height: 56px; border-radius: 14px; }
+  .badge { font-size: 0.75rem; }
+  .hero { padding-block: var(--space-4); }
   .hero img { width: 120px; }
-  .hero h1 { font-size: 2rem; margin-bottom: var(--space-2); }
-  .hero .lead { font-size: 1rem; margin-bottom: var(--space-2); }
-  h2 { font-size: 1.5rem; margin-top: var(--space-4); }
+  .hero h1 { margin-bottom: var(--space-3); }
+  .hero .lead { font-size: 0.9375rem; margin-bottom: var(--space-3); }
   .app-icon.app-icon-lg { width: 80px; height: 80px; border-radius: 18px; }
-  .app-hero { gap: var(--space-3); margin-bottom: var(--space-4); }
+  .app-hero { gap: var(--space-4); margin-bottom: var(--space-5); }
+  .cta-band { margin-top: var(--space-6); padding: var(--space-5); }
+  .steps { gap: var(--space-5); }
   .shots { padding-bottom: var(--space-4); }
-  .shots ul { gap: var(--space-5); }
+  .shots ul { gap: var(--space-4); }
+  .site-footer { padding-block: var(--space-5) var(--space-6); }
   /* Cabecera: marca centrada y menú repartido con espacio a los lados (space-around: medio hueco en cada borde) */
   .header-inner { flex-direction: column; align-items: center; gap: var(--space-1); }
-  .brand { justify-content: center; }
+  .brand { justify-content: center; font-size: 1.25rem; }
   .header-inner nav { width: 100%; }
   .nav-list { width: 100%; justify-content: space-around; gap: var(--space-1); }
   .nav-list a { font-size: 0.8125rem; }
+}
+
+/* :hover solo donde hay mouse: en pantallas táctiles el primer toque dejaba el estado "pegado" */
+@media (hover: hover) and (pointer: fine) {
+  .nav-list a:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 6px; }
+  .theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
+  .btn-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+  .btn-ghost:hover { background: var(--surface); }
+  .card-title a:hover { color: var(--accent); }
 }
 
 @media (prefers-reduced-motion: no-preference) {
