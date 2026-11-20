@@ -93,6 +93,10 @@
     "reinaneon": {
       "tagline": "Neon queens puzzles.",
       "description": "Place one queen per row, column, and region so none touch. A sister app to SuguruNeon, with hints, a daily challenge, and several themes."
+    },
+    "shikakuneon": {
+      "tagline": "Neon Shikaku rectangle puzzles.",
+      "description": "Draw one rectangle per number until the whole board is covered. A sister app to SuguruNeon and ReinaNeon, with hints, a daily challenge, and several themes."
     }
   },
   "footer": {
