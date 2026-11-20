@@ -119,5 +119,34 @@
       ]
     },
     "screenshotSize": { "width": 1080, "height": 1920 }
+  },
+  {
+    "id": "shikakuneon",
+    "name": "ShikakuNeon",
+    "status": "testing",
+    "versionProduction": null,
+    "versionTesting": "1.0.0",
+    "playUrl": null,
+    "optInUrl": "https://play.google.com/apps/testing/com.chardev.shikakuneon",
+    "groupUrl": "https://groups.google.com/g/chardev-testers",
+    "privacyUrl": "https://chardevmdp.github.io/shikakuneon-legal/",
+    "icon": "/images/apps/shikakuneon/icon.png",
+    "screenshots": {
+      "es": [
+        "/images/apps/shikakuneon/es/1.png",
+        "/images/apps/shikakuneon/es/2.png",
+        "/images/apps/shikakuneon/es/3.png",
+        "/images/apps/shikakuneon/es/4.png",
+        "/images/apps/shikakuneon/es/5.png"
+      ],
+      "en": [
+        "/images/apps/shikakuneon/en/1.png",
+        "/images/apps/shikakuneon/en/2.png",
+        "/images/apps/shikakuneon/en/3.png",
+        "/images/apps/shikakuneon/en/4.png",
+        "/images/apps/shikakuneon/en/5.png"
+      ]
+    },
+    "screenshotSize": { "width": 1080, "height": 1920 }
   }
 ]
