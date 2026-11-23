@@ -11,6 +11,7 @@ export interface App {
   versionTesting: string | null;
   playUrl: string | null;
   optInUrl: string | null;
+  installUrl?: string | null;
   groupUrl: string | null;
   privacyUrl: string | null;
   siteUrl?: string | null;
@@ -67,15 +68,16 @@ export function validateApps(input: unknown): App[] {
       need(a[key] === null || isHttps(a[key]), `${key} debe ser null o una URL https`);
     }
     need(a.siteUrl === undefined || a.siteUrl === null || isHttps(a.siteUrl), 'siteUrl debe ser null, faltar o ser una URL https');
+    need(a.installUrl === undefined || a.installUrl === null || isHttps(a.installUrl), 'installUrl debe ser null, faltar o ser una URL https');
     for (const key of ['versionProduction', 'versionTesting'] as const) {
       need(a[key] === null || (typeof a[key] === 'string' && a[key] !== ''), `${key} debe ser null o un texto`);
     }
 
-    const testingKeys = ['versionTesting', 'optInUrl', 'groupUrl'] as const;
+    const testingKeys = ['versionTesting', 'optInUrl', 'installUrl', 'groupUrl'] as const;
     const testingSet = testingKeys.filter((k) => a[k] !== null && a[k] !== undefined);
     need(
       testingSet.length === 0 || testingSet.length === testingKeys.length,
-      'testing incompleto: versionTesting, optInUrl y groupUrl van juntos',
+      'testing incompleto: versionTesting, optInUrl, installUrl y groupUrl van juntos',
     );
 
     if (a.status === 'production') {
@@ -86,6 +88,7 @@ export function validateApps(input: unknown): App[] {
     if (a.status === 'testing') {
       need(!!a.versionTesting, 'en testing falta versionTesting');
       need(!!a.optInUrl, 'en testing falta optInUrl');
+      need(!!a.installUrl, 'en testing falta installUrl');
       need(!!a.groupUrl, 'en testing falta groupUrl');
       need(!!a.privacyUrl, 'en testing falta privacyUrl');
     }
