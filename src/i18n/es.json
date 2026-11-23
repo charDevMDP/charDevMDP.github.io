@@ -54,7 +54,9 @@
       "cta1": "Unirme al grupo",
       "step2": "Abrí el enlace de prueba de la app y tocá «Convertirme en tester».",
       "cta2": "Abrir enlace de prueba",
-      "step3": "Instalá la app desde Google Play con la misma cuenta de Google."
+      "step3": "Instalá la app desde Google Play con la misma cuenta de Google.",
+      "cta3": "Abrir en Google Play",
+      "hint3": "Si no aparece o la pantalla queda en negro, abrí Play Store y buscá la app por nombre. Puede tardar un rato en aparecer después de unirte."
     },
     "leaveHeading": "Cómo darte de baja",
     "leave": {

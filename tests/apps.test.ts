@@ -31,6 +31,7 @@ const testing = (over: Record<string, unknown> = {}) =>
     status: 'testing',
     versionTesting: '0.9.0',
     optInUrl: 'https://play.google.com/apps/testing/com.chardev.demo',
+    installUrl: 'https://play.google.com/store/apps/details?id=com.chardev.demo',
     groupUrl: 'https://groups.google.com/g/chardev-testers',
     privacyUrl: 'https://chardevmdp.github.io/demo-legal/',
     ...over,
@@ -54,6 +55,18 @@ describe('validateApps', () => {
     expect(() => validateApps([testing({ versionTesting: null })])).toThrow('versionTesting');
     expect(() => validateApps([testing({ optInUrl: null })])).toThrow('optInUrl');
     expect(() => validateApps([testing({ groupUrl: null })])).toThrow('groupUrl');
+  });
+
+  it('exige installUrl en testing y la acepta faltante o null fuera de testing', () => {
+    expect(() => validateApps([testing({ installUrl: null })])).toThrow('installUrl');
+    expect(() => validateApps([testing({ installUrl: undefined })])).toThrow('installUrl');
+    expect(() => validateApps([production({ id: 'a' }), base({ id: 'b' })])).not.toThrow();
+  });
+
+  it('installUrl rechaza lo que no es una URL https', () => {
+    for (const installUrl of ['http://play.google.com/store/apps/details?id=x', 'javascript:alert(1)', '//play.google.com/x', '', 5]) {
+      expect(() => validateApps([testing({ installUrl })]), String(installUrl)).toThrow('installUrl');
+    }
   });
 
   it('exige privacyUrl en producción y en testing', () => {
@@ -105,6 +118,7 @@ describe('validateApps', () => {
     expect(() => validateApps([production({ versionTesting: '1.1.0' })])).toThrow('testing incompleto');
     expect(() => validateApps([base({ optInUrl: 'https://play.google.com/apps/testing/x' })])).toThrow('testing incompleto');
     expect(() => validateApps([base({ groupUrl: 'https://groups.google.com/g/x' })])).toThrow('testing incompleto');
+    expect(() => validateApps([base({ installUrl: 'https://play.google.com/store/apps/details?id=x' })])).toThrow('testing incompleto');
   });
 
   it('exige rutas locales en screenshots e icon', () => {
@@ -133,6 +147,7 @@ describe('primaryAction y hasTesting', () => {
         id: 'd',
         versionTesting: '1.1.0',
         optInUrl: 'https://play.google.com/apps/testing/x',
+        installUrl: 'https://play.google.com/store/apps/details?id=x',
         groupUrl: 'https://groups.google.com/g/chardev-testers',
       }),
     ])[0];

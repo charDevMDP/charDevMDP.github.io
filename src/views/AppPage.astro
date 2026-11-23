@@ -65,7 +65,7 @@ const testingOpen = hasTesting(app);
         <h2 id="tester-heading">{t(lang, 'app.testerHeading')}</h2>
         <p>{t(lang, 'app.testerIntro', { name: app.name })}</p>
         <blockquote class="note">{t(lang, 'tester.groupNote')}</blockquote>
-        <TesterSteps lang={lang} kind="join" groupUrl={app.groupUrl} optInUrl={app.optInUrl} />
+        <TesterSteps lang={lang} kind="join" groupUrl={app.groupUrl} optInUrl={app.optInUrl} installUrl={app.installUrl} />
         <h2>{t(lang, 'app.leaveHeading')}</h2>
         <TesterSteps lang={lang} kind="leave" groupUrl={app.groupUrl} optInUrl={app.optInUrl} />
       </section>

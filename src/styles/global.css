@@ -134,6 +134,7 @@ a:focus-visible, summary:focus-visible, .shots:focus-visible, .theme-toggle:focu
 .actions { display: flex; flex-wrap: wrap; gap: var(--space-3); margin: 0 0 var(--space-5); padding: 0; list-style: none; }
 .steps { display: grid; gap: var(--space-4); padding-left: var(--space-5); }
 .steps li p { margin-bottom: var(--space-2); }
+.steps li .step-hint { margin: var(--space-2) 0 0; font-size: 0.95rem; color: var(--text-muted); }
 .shots { overflow-x: auto; padding-bottom: var(--space-3); overscroll-behavior-x: contain; scroll-snap-type: x proximity; }
 .shots li { scroll-snap-align: start; }
 .shots ul { display: flex; gap: var(--space-4); margin: 0; padding: 0; list-style: none; width: max-content; }
