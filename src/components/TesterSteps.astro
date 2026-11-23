@@ -7,20 +7,26 @@ interface Props {
   kind: 'join' | 'leave';
   groupUrl?: string | null;
   optInUrl?: string | null;
+  installUrl?: string | null;
 }
-const { lang, kind, groupUrl = null, optInUrl = null } = Astro.props;
+const { lang, kind, groupUrl = null, optInUrl = null, installUrl = null } = Astro.props;
 
 const steps =
   kind === 'join'
     ? [
-        { text: t(lang, 'tester.join.step1'), href: groupUrl, cta: t(lang, 'tester.join.cta1') },
-        { text: t(lang, 'tester.join.step2'), href: optInUrl, cta: t(lang, 'tester.join.cta2') },
-        { text: t(lang, 'tester.join.step3'), href: null, cta: '' },
+        { text: t(lang, 'tester.join.step1'), href: groupUrl, cta: t(lang, 'tester.join.cta1'), hint: '' },
+        { text: t(lang, 'tester.join.step2'), href: optInUrl, cta: t(lang, 'tester.join.cta2'), hint: '' },
+        {
+          text: t(lang, 'tester.join.step3'),
+          href: installUrl,
+          cta: t(lang, 'tester.join.cta3'),
+          hint: installUrl ? t(lang, 'tester.join.hint3') : '',
+        },
       ]
     : [
-        { text: t(lang, 'tester.leave.step1'), href: optInUrl, cta: t(lang, 'tester.leave.cta1') },
-        { text: t(lang, 'tester.leave.step2'), href: null, cta: '' },
-        { text: t(lang, 'tester.leave.step3'), href: groupUrl, cta: t(lang, 'tester.leave.cta3') },
+        { text: t(lang, 'tester.leave.step1'), href: optInUrl, cta: t(lang, 'tester.leave.cta1'), hint: '' },
+        { text: t(lang, 'tester.leave.step2'), href: null, cta: '', hint: '' },
+        { text: t(lang, 'tester.leave.step3'), href: groupUrl, cta: t(lang, 'tester.leave.cta3'), hint: '' },
       ];
 ---
 <ol class="steps">
@@ -32,6 +38,7 @@ const steps =
           {s.cta}<span class="sr-only"> {t(lang, 'a11y.newTab')}</span>
         </a>
       )}
+      {s.hint && <p class="step-hint">{s.hint}</p>}
     </li>
   ))}
 </ol>

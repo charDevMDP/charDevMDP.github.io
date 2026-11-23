@@ -54,7 +54,9 @@
       "cta1": "Join the group",
       "step2": "Open the app's test link and tap “Become a tester”.",
       "cta2": "Open test link",
-      "step3": "Install the app from Google Play with the same Google account."
+      "step3": "Install the app from Google Play with the same Google account.",
+      "cta3": "Open in Google Play",
+      "hint3": "If it doesn't show up or the screen stays black, open Play Store and search for the app by name. It can take a while to appear after you join."
     },
     "leaveHeading": "How to leave",
     "leave": {
